@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Portfolio favicon">
+  <rect width="64" height="64" rx="18" fill="oklch(0.34 0.03 287)" />
+  <path d="M14 42C21 27 29 20 37 18c7-2 12 1 13 7 1 7-4 13-11 15-6 2-14 1-25 2Z" fill="oklch(0.96 0.03 12)" />
+  <path d="M18 24c4 5 10 7 17 7 8 0 13-2 17-7" fill="none" stroke="oklch(0.72 0.14 8)" stroke-linecap="round" stroke-width="4" />
+  <circle cx="47" cy="18" r="5" fill="oklch(0.6 0.19 25)" />
+</svg>
