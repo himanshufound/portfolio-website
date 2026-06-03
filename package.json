@@ -1,0 +1,10 @@
+{
+  "name": "portfolio-website",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Personal portfolio: soft like sakura, fast like ferrari.",
+  "scripts": {
+    "dev": "npx --yes serve@latest -l 4173 .",
+    "start": "npm run dev"
+  }
+}
