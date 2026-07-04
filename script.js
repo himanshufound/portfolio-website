@@ -71,21 +71,21 @@
 
   // Metadata pulled from each file's ID3 tags. Order here defines play order.
   const TRACKS = [
-    { title: "DtMF", artist: "Bad Bunny", src: "audio/Bad Bunny - DtMF (SPOTISAVER).mp3" },
-    { title: "Brazil", artist: "Declan McKenna", src: "audio/Declan McKenna - Brazil (SPOTISAVER).mp3" },
-    { title: "End of Beginning", artist: "Djo", src: "audio/Djo - End of Beginning (SPOTISAVER).mp3" },
-    { title: "A Man Without Love", artist: "Engelbert Humperdinck", src: "audio/Engelbert Humperdinck - A Man Without Love (SPOTISAVER).mp3" },
-    { title: "Let's Fall in Love for the Night", artist: "FINNEAS", src: "audio/FINNEAS - Let's Fall in Love for the Night (SPOTISAVER).mp3" },
-    { title: "Shelter", artist: "FINNEAS", src: "audio/FINNEAS - Shelter (SPOTISAVER).mp3" },
-    { title: "Sign of the Times", artist: "Harry Styles", src: "audio/Harry Styles - Sign of the Times (SPOTISAVER).mp3" },
-    { title: "Bound 2", artist: "Kanye West", src: "audio/Kanye West - Bound 2 (SPOTISAVER).mp3" },
-    { title: "Touch The Sky", artist: "Kanye West, Lupe Fiasco", src: "audio/Kanye West, Lupe Fiasco - Touch The Sky (SPOTISAVER).mp3" },
-    { title: "Runaway", artist: "Kanye West, Pusha T", src: "audio/Kanye West, Pusha T - Runaway (SPOTISAVER).mp3" },
-    { title: "All Falls Down", artist: "Kanye West, Syleena Johnson", src: "audio/Kanye West, Syleena Johnson - All Falls Down (SPOTISAVER).mp3" },
-    { title: "luther", artist: "Kendrick Lamar, SZA", src: "audio/Kendrick Lamar, SZA - luther (with sza) (SPOTISAVER).mp3" },
-    { title: "What You Saying", artist: "Lil Uzi Vert", src: "audio/Lil Uzi Vert - What You Saying (SPOTISAVER).mp3" },
-    { title: "Pasta", artist: "New Rules", src: "audio/New Rules - Pasta (SPOTISAVER).mp3" },
-    { title: "Ophelia", artist: "The Lumineers", src: "audio/The Lumineers - Ophelia (SPOTISAVER).mp3" },
+    { title: "DtMF", artist: "Bad Bunny", src: "audio/Bad Bunny - DtMF.mp3" },
+    { title: "Brazil", artist: "Declan McKenna", src: "audio/Declan McKenna - Brazil.mp3" },
+    { title: "End of Beginning", artist: "Djo", src: "audio/Djo - End of Beginning.mp3" },
+    { title: "A Man Without Love", artist: "Engelbert Humperdinck", src: "audio/Engelbert Humperdinck - A Man Without Love.mp3" },
+    { title: "Let's Fall in Love for the Night", artist: "FINNEAS", src: "audio/FINNEAS - Let's Fall in Love for the Night.mp3" },
+    { title: "Shelter", artist: "FINNEAS", src: "audio/FINNEAS - Shelter.mp3" },
+    { title: "Sign of the Times", artist: "Harry Styles", src: "audio/Harry Styles - Sign of the Times.mp3" },
+    { title: "Bound 2", artist: "Kanye West", src: "audio/Kanye West - Bound 2.mp3" },
+    { title: "Touch The Sky", artist: "Kanye West, Lupe Fiasco", src: "audio/Kanye West, Lupe Fiasco - Touch The Sky.mp3" },
+    { title: "Runaway", artist: "Kanye West, Pusha T", src: "audio/Kanye West, Pusha T - Runaway.mp3" },
+    { title: "All Falls Down", artist: "Kanye West, Syleena Johnson", src: "audio/Kanye West, Syleena Johnson - All Falls Down.mp3" },
+    { title: "luther", artist: "Kendrick Lamar, SZA", src: "audio/Kendrick Lamar, SZA - luther (with sza).mp3" },
+    { title: "What You Saying", artist: "Lil Uzi Vert", src: "audio/Lil Uzi Vert - What You Saying.mp3" },
+    { title: "Pasta", artist: "New Rules", src: "audio/New Rules - Pasta.mp3" },
+    { title: "Ophelia", artist: "The Lumineers", src: "audio/The Lumineers - Ophelia.mp3" },
   ];
 
   const root = document.querySelector("[data-player]");
@@ -163,6 +163,7 @@
     };
 
     const play = () => {
+      renderNow();
       ensureLoaded();
       const p = audio.play();
       if (p && typeof p.catch === "function") p.catch(() => {});
@@ -289,8 +290,8 @@
       if (e.key === "Escape" && root.classList.contains("is-open")) closePanel();
     });
 
-    // initial paint (no audio fetched yet — src is set on first play)
-    renderNow();
+    // initial paint (no audio fetched yet — src is set on first play).
+    // Leave the "Press play to begin" placeholder until the first play/select.
     markActive();
   }
 })();

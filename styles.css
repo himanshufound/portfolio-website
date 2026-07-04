@@ -1622,4 +1622,5 @@ main {
   }
 
   .petals { display: none; }
+  .marquee__track { animation: none !important; }
 }
