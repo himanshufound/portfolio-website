@@ -3,7 +3,7 @@
 Personal portfolio of Himanshu Rawat — a catalog of projects and ideas.
 Soft like sakura, fast like Ferrari.
 
-**Live:** https://portfolio-himanshu.vercel.app/
+**Live:** https://www.himanshufr.tech/
 
 ## Stack
 
