@@ -1057,6 +1057,137 @@ main {
   color: oklch(0.94 0.02 60);
 }
 
+/* board mockup */
+.board {
+  width: min(360px, 100%);
+  display: grid;
+  gap: 16px;
+  padding: 20px;
+  background: var(--paper);
+  border: 1px solid var(--ink-line);
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
+  transform: rotate(-2deg);
+}
+
+.board__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed var(--ink-line);
+}
+
+.board__head-k {
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.board__head-v {
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--ink);
+}
+
+.board__stack {
+  display: grid;
+  gap: 10px;
+}
+
+.board__card {
+  display: grid;
+  gap: 6px;
+  padding: 14px;
+  background: oklch(0.99 0.01 60);
+  border: 1px solid var(--ink-line);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 6px 16px oklch(0.32 0.18 14 / 0.1);
+}
+
+.board__card--back {
+  transform: rotate(1.5deg);
+  opacity: 0.55;
+  box-shadow: var(--shadow-sm);
+}
+
+.board__card-org {
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.board__card-title {
+  font-family: "Fraunces", serif;
+  font-size: 0.98rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.board__card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.board__chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--ink-line);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.board__stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 9px;
+  border: 1.5px dashed var(--red);
+  border-radius: 6px;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red);
+  transform: rotate(-5deg);
+}
+
+.board__agent {
+  display: grid;
+  gap: 4px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--ink);
+  box-shadow: 0 10px 24px oklch(0.16 0.05 22 / 0.22);
+}
+
+.board__agent-tag {
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: oklch(0.94 0.02 60 / 0.55);
+}
+
+.board__agent p {
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-size: 0.88rem;
+  line-height: 1.35;
+  color: oklch(0.98 0.01 75);
+}
+
 /* ---------- contact ---------- */
 
 .contact__title {
