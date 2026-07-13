@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.himanshufr.tech/sitemap.xml
+Sitemap: https://himanshufr.me/sitemap.xml

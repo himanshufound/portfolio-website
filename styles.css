@@ -526,7 +526,7 @@ main {
   font-style: italic;
   font-size: clamp(1.4rem, 3vw, 2.4rem);
   color: var(--ink);
-  animation: marquee 26s linear infinite;
+  animation: marquee 52s linear infinite;
   will-change: transform;
 }
 
@@ -706,8 +706,31 @@ main {
   background: var(--red);
 }
 
+.case__metric {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 8px 14px;
+  border: 1px solid var(--ink-line);
+  border-radius: 999px;
+  background: oklch(0.99 0.005 80 / 0.6);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  letter-spacing: -0.005em;
+}
+
+.case__metric-num {
+  font-family: "Fraunces", serif;
+  font-weight: 900;
+  font-size: 1.05rem;
+  color: var(--red);
+}
+
 .case__link {
-  margin-top: 6px;
+  margin-top: 14px;
   font-family: "Inter", sans-serif;
   font-size: 0.96rem;
   font-weight: 500;
@@ -1739,6 +1762,30 @@ main {
 
   .contact__handle {
     font-size: 1.6rem;
+  }
+
+  /* collapse the player FAB to an icon so it stops covering content */
+  .player__fab {
+    height: 52px;
+    width: 52px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .player__fab-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .player__fab-icon {
+    width: 24px;
+    height: 24px;
   }
 }
 
