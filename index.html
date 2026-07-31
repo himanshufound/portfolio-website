@@ -36,8 +36,9 @@
       rel="stylesheet"
     />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="styles.css?v=3" />
+    <link rel="stylesheet" href="styles.css?v=5" />
     <script src="script.js?v=3" defer></script>
+    <script src="demos.js?v=2" defer></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -229,41 +230,128 @@
         <article class="case case--pillybot">
           <div class="case__index" aria-hidden="true">P/01</div>
           <div class="case__visual">
-            <div class="phone">
-              <div class="phone__notch" aria-hidden="true"></div>
-              <div class="phone__screen">
-                <div class="phone__topbar">
-                  <span>9:41</span>
-                  <span>pillybot</span>
-                </div>
-                <div class="phone__greeting">
-                  <p class="phone__hello">good morning,</p>
-                  <p class="phone__name">grandma 🌸</p>
-                </div>
-                <div class="phone__pill">
-                  <div class="phone__pill-dot" aria-hidden="true"></div>
-                  <div class="phone__pill-body">
-                    <p>donepezil &middot; 1 tab</p>
-                    <p class="phone__pill-meta">after breakfast &middot; 8:30 am</p>
+            <div
+              class="demo demo--pilly"
+              data-demo="pilly"
+              data-step="0"
+              role="group"
+              aria-label="pillybot, interactive preview"
+            >
+              <div class="phone">
+                <div class="phone__notch" aria-hidden="true"></div>
+                <div class="phone__screen">
+                  <div class="phone__topbar">
+                    <span>8:31</span>
+                    <span>pillybot</span>
                   </div>
-                  <span class="phone__pill-cta" aria-hidden="true">✓</span>
-                </div>
-                <div class="phone__row">
-                  <div>
-                    <p class="phone__row-k">heart</p>
-                    <p class="phone__row-v">72 <span>bpm</span></p>
+                  <div class="phone__greeting">
+                    <p class="phone__hello">good morning,</p>
+                    <p class="phone__name">grandma 🌸</p>
                   </div>
-                  <div>
-                    <p class="phone__row-k">sleep</p>
-                    <p class="phone__row-v">7h 12m</p>
+
+                  <button
+                    class="phone__pill"
+                    type="button"
+                    data-dose
+                    data-needs-js
+                    tabindex="-1"
+                  >
+                    <span class="visually-hidden" data-dose-action>Mark as taken:</span>
+                    <span class="phone__pill-dot" aria-hidden="true"></span>
+                    <span class="phone__pill-body">
+                      <span class="phone__pill-title">donepezil &middot; 1 tab</span>
+                      <span class="swap phone__pill-meta" data-swap="dose-meta">
+                        <span class="swap__item is-active">after breakfast &middot; 8:30 am</span>
+                        <span class="swap__item" aria-hidden="true">taken &middot; 8:32 am</span>
+                      </span>
+                    </span>
+                    <span class="phone__pill-cta" aria-hidden="true">
+                      <svg viewBox="0 0 32 32" width="26" height="26" focusable="false">
+                        <circle class="phone__ring-track" cx="16" cy="16" r="13" />
+                        <circle class="phone__ring" cx="16" cy="16" r="13" />
+                        <path class="phone__tick" d="M9.6 16.5l4.3 4.3 8.5-9.1" />
+                      </svg>
+                    </span>
+                  </button>
+
+                  <p class="phone__vitals">slept 7h 12m &middot; resting 72 bpm</p>
+
+                  <div class="phone__today">
+                    <p class="phone__today-head">today</p>
+                    <ul class="phone__today-list">
+                      <li class="phone__today-row phone__today-row--done">
+                        <span class="phone__today-tick" aria-hidden="true"></span>
+                        <span class="phone__today-time">7:30 am</span>
+                        <span class="phone__today-name">vitamin d</span>
+                      </li>
+                      <li class="phone__today-row phone__today-row--dose">
+                        <span class="phone__today-tick" aria-hidden="true"></span>
+                        <span class="phone__today-time">8:30 am</span>
+                        <span class="phone__today-name">donepezil</span>
+                      </li>
+                      <li class="phone__today-row">
+                        <span class="phone__today-tick" aria-hidden="true"></span>
+                        <span class="phone__today-time">1:00 pm</span>
+                        <span class="phone__today-name">memantine</span>
+                      </li>
+                      <li class="phone__today-row">
+                        <span class="phone__today-tick" aria-hidden="true"></span>
+                        <span class="phone__today-time">6:00 pm</span>
+                        <span class="phone__today-name">calcium</span>
+                      </li>
+                      <li class="phone__today-row">
+                        <span class="phone__today-tick" aria-hidden="true"></span>
+                        <span class="phone__today-time">9:00 pm</span>
+                        <span class="phone__today-name">melatonin</span>
+                      </li>
+                    </ul>
                   </div>
-                </div>
-                <div class="phone__chat">
-                  <span class="phone__chat-bubble">
-                    refill in 2 days. tell mom?
-                  </span>
+
+                  <p class="phone__family swap" data-swap="family">
+                    <span class="swap__item is-active">mom gets a quiet note when it&rsquo;s done</span>
+                    <span class="swap__item" aria-hidden="true">
+                      <span class="phone__family-check" aria-hidden="true">✓</span>
+                      mom notified &middot; 8:32 am
+                    </span>
+                  </p>
+
+                  <div class="phone__chat">
+                    <button
+                      class="phone__chat-bubble"
+                      type="button"
+                      data-chat
+                      data-needs-js
+                      tabindex="-1"
+                    >
+                      <span class="swap" data-swap="chat">
+                        <span class="swap__item is-active">morning. donepezil&rsquo;s ready when you are.</span>
+                        <span class="swap__item" aria-hidden="true">mom&rsquo;s been told. all good 🌸</span>
+                        <span class="swap__item" aria-hidden="true">that&rsquo;s six days running. proud of you.</span>
+                        <span class="swap__item" aria-hidden="true">want me to move it to 8:15?</span>
+                      </span>
+                    </button>
+                  </div>
                 </div>
               </div>
+
+              <div class="demo__foot">
+                <p class="demo__hint" data-hint>tap the reminder</p>
+                <button class="demo__replay" type="button" data-replay hidden>
+                  <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false">
+                    <path
+                      d="M4 12a8 8 0 1 1 2.5 5.8M4 18v-5h5"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                  replay
+                </button>
+              </div>
+
+              <p class="demo__live" role="status" aria-live="polite" data-live></p>
             </div>
           </div>
 
@@ -343,31 +431,121 @@
           </div>
 
           <div class="case__visual">
-            <div class="board">
-              <div class="board__head">
-                <span class="board__head-k">open tasks</span>
-                <span class="board__head-v">12</span>
-              </div>
-              <div class="board__stack">
-                <div class="board__card board__card--back" aria-hidden="true">
-                  <p class="board__card-org">meals on wheels</p>
-                  <p class="board__card-title">clean up donor spreadsheet</p>
+            <div
+              class="demo demo--board"
+              data-demo="board"
+              data-step="0"
+              data-lane="human"
+              role="group"
+              aria-label="aimpact, interactive preview"
+            >
+              <div class="board">
+                <div class="board__head">
+                  <span class="board__head-k">open tasks</span>
+                  <span class="board__head-v" data-open>12</span>
                 </div>
-                <div class="board__card">
-                  <p class="board__card-org">clean water trust</p>
-                  <p class="board__card-title">one-page site for the spring drive</p>
-                  <div class="board__card-foot">
-                    <span class="board__chip">claimed 1 / 1</span>
-                    <span class="board__stamp">
-                      reviewed <span aria-hidden="true">✓</span>
-                    </span>
+
+                <div class="board__stack">
+                  <div class="board__card board__card--back" aria-hidden="true">
+                    <p class="board__card-org">meals on wheels</p>
+                    <p class="board__card-title">clean up donor spreadsheet</p>
+                  </div>
+                  <div class="board__card">
+                    <p class="board__card-org">clean water trust</p>
+                    <p class="board__card-title">one-page site for the spring drive</p>
+                    <div class="board__card-foot">
+                      <span class="board__chip">
+                        <span class="swap" data-swap="chip">
+                          <span class="swap__item is-active">unclaimed</span>
+                          <span class="swap__item" aria-hidden="true">claimed 1 / 1</span>
+                        </span>
+                      </span>
+                      <span class="board__stamp" data-stamp>
+                        reviewed <span aria-hidden="true">✓</span>
+                      </span>
+                    </div>
                   </div>
                 </div>
+
+                <div
+                  class="board__lanes"
+                  role="radiogroup"
+                  aria-label="who takes this task"
+                  data-lanes
+                >
+                  <button
+                    class="board__lane"
+                    type="button"
+                    role="radio"
+                    aria-checked="true"
+                    tabindex="-1"
+                    data-lane-btn="human"
+                  >
+                    a human
+                  </button>
+                  <button
+                    class="board__lane"
+                    type="button"
+                    role="radio"
+                    aria-checked="false"
+                    tabindex="-1"
+                    data-lane-btn="agent"
+                  >
+                    an ai agent
+                  </button>
+                </div>
+
+                <div class="rail" data-rail>
+                  <span class="rail__track" aria-hidden="true">
+                    <span class="rail__fill"></span>
+                  </span>
+                  <span class="rail__token" data-token aria-hidden="true">you</span>
+                  <ol class="rail__stops">
+                    <li class="rail__stop"><span class="rail__dot" aria-hidden="true"></span>posted</li>
+                    <li class="rail__stop"><span class="rail__dot" aria-hidden="true"></span>claimed</li>
+                    <li class="rail__stop"><span class="rail__dot" aria-hidden="true"></span>human review</li>
+                    <li class="rail__stop"><span class="rail__dot" aria-hidden="true"></span>shipped</li>
+                  </ol>
+                </div>
+
+                <div class="board__agent">
+                  <span class="swap" data-swap="note">
+                    <span class="swap__item is-active">
+                      <span class="board__agent-tag">aimpact</span>
+                      <span class="board__agent-line">small, well-scoped, public. anyone can claim it.</span>
+                    </span>
+                    <span class="swap__item" aria-hidden="true">
+                      <span class="board__agent-tag">you</span>
+                      <span class="board__agent-line">claimed. a guided template, not a vague brief.</span>
+                    </span>
+                    <span class="swap__item" aria-hidden="true">
+                      <span class="board__agent-tag">agent</span>
+                      <span class="board__agent-line">read skill.md. volunteering in one prompt.</span>
+                    </span>
+                    <span class="swap__item" aria-hidden="true">
+                      <span class="board__agent-tag">clean water trust</span>
+                      <span class="board__agent-line">a person here is reading it. nothing ships before that.</span>
+                    </span>
+                    <span class="swap__item" aria-hidden="true">
+                      <span class="board__agent-tag">clean water trust</span>
+                      <span class="board__agent-line">approved, and live on the spring drive page.</span>
+                    </span>
+                  </span>
+                </div>
+
+                <button
+                  class="board__go"
+                  type="button"
+                  data-go
+                  data-demo-start
+                  data-needs-js
+                  tabindex="-1"
+                >
+                  claim it
+                </button>
               </div>
-              <div class="board__agent">
-                <span class="board__agent-tag">agent</span>
-                <p>read skill.md. volunteering in one prompt.</p>
-              </div>
+
+              <p class="demo__live" role="status" aria-live="polite" data-live></p>
             </div>
           </div>
         </article>
@@ -375,36 +553,122 @@
         <article class="case case--focusflow">
           <div class="case__index" aria-hidden="true">P/03</div>
           <div class="case__visual case__visual--dark">
-            <div class="dashboard">
-              <div class="dashboard__row dashboard__row--top">
-                <span class="dashboard__pill">lap 03 / 04</span>
-                <span class="dashboard__time">19:42</span>
+            <div
+              class="demo demo--flow"
+              data-demo="flow"
+              data-step="0"
+              data-nudge="idle"
+              role="group"
+              aria-label="focusflow, interactive preview"
+            >
+              <div class="dashboard">
+                <div class="dashboard__row dashboard__row--top">
+                  <span class="dashboard__pill" data-lap>lap 03 / 04</span>
+                  <span class="dashboard__time" data-time>25:00</span>
+                </div>
+
+                <div class="dashboard__hud">
+                  <p class="dashboard__hud-k">focus</p>
+                  <p class="dashboard__hud-v swap" data-swap="focus">
+                    <span class="swap__item is-active">ready</span>
+                    <span class="swap__item" aria-hidden="true">deep</span>
+                    <span class="swap__item" aria-hidden="true">drifting</span>
+                    <span class="swap__item" aria-hidden="true">banked</span>
+                  </p>
+                </div>
+
+                <div
+                  class="dashboard__bars"
+                  data-bars
+                  role="img"
+                  aria-label="Telemetry for this lap"
+                >
+                  <span style="--h: 28%"></span>
+                  <span style="--h: 46%"></span>
+                  <span style="--h: 38%"></span>
+                  <span style="--h: 72%"></span>
+                  <span style="--h: 64%"></span>
+                  <span style="--h: 88%"></span>
+                  <span style="--h: 78%"></span>
+                  <span style="--h: 92%"></span>
+                  <span style="--h: 70%"></span>
+                  <span style="--h: 84%"></span>
+                </div>
+
+                <ul class="dashboard__tasks">
+                  <li class="dashboard__collapse" data-origin>
+                    <div class="dashboard__collapse-inner">
+                      <button class="dashboard__task" type="button" aria-pressed="false" data-task data-needs-js tabindex="-1">
+                        <span class="dashboard__task-box" aria-hidden="true"></span>
+                        <span class="dashboard__task-label">draft pillybot landing</span>
+                      </button>
+                    </div>
+                  </li>
+                  <li class="dashboard__collapse is-closed" data-splits>
+                    <div class="dashboard__collapse-inner" inert>
+                      <button class="dashboard__task" type="button" aria-pressed="false" data-task data-needs-js tabindex="-1">
+                        <span class="dashboard__task-box" aria-hidden="true"></span>
+                        <span class="dashboard__task-label">outline the hero</span>
+                      </button>
+                      <button class="dashboard__task" type="button" aria-pressed="false" data-task data-needs-js tabindex="-1">
+                        <span class="dashboard__task-box" aria-hidden="true"></span>
+                        <span class="dashboard__task-label">write the three sections</span>
+                      </button>
+                    </div>
+                  </li>
+                  <li>
+                    <button class="dashboard__task" type="button" aria-pressed="true" data-task data-needs-js tabindex="-1">
+                      <span class="dashboard__task-box" aria-hidden="true"></span>
+                      <span class="dashboard__task-label">ship newsletter copy</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button class="dashboard__task" type="button" aria-pressed="false" data-task data-needs-js tabindex="-1">
+                      <span class="dashboard__task-box" aria-hidden="true"></span>
+                      <span class="dashboard__task-label">reply to recruiter dm</span>
+                    </button>
+                  </li>
+                </ul>
+
+                <div class="dashboard__claude">
+                  <span class="dashboard__claude-tag">claude</span>
+                  <p class="swap" data-swap="claude">
+                    <span class="swap__item is-active">quiet unless you stall.</span>
+                    <span class="swap__item" aria-hidden="true">sixteen minutes on one task. split it?</span>
+                    <span class="swap__item" aria-hidden="true">shorter laps stick. go again.</span>
+                    <span class="swap__item" aria-hidden="true">three done. that&rsquo;s a lap.</span>
+                  </p>
+                  <button
+                    class="dashboard__claude-action"
+                    type="button"
+                    data-split-action
+                    hidden
+                  >
+                    split it
+                  </button>
+                </div>
+
+                <button
+                  class="dashboard__start"
+                  type="button"
+                  data-start
+                  data-demo-start
+                  data-needs-js
+                  tabindex="-1"
+                >
+                  <span class="dashboard__start-icon" aria-hidden="true">
+                    <svg class="ic ic--play" viewBox="0 0 24 24" width="15" height="15" focusable="false">
+                      <path d="M8 5v14l11-7z" fill="currentColor" />
+                    </svg>
+                    <svg class="ic ic--pause" viewBox="0 0 24 24" width="15" height="15" focusable="false">
+                      <path d="M7 5h3.2v14H7zM13.8 5H17v14h-3.2z" fill="currentColor" />
+                    </svg>
+                  </span>
+                  <span data-start-label>start the lap</span>
+                </button>
               </div>
-              <div class="dashboard__hud">
-                <p class="dashboard__hud-k">focus</p>
-                <p class="dashboard__hud-v">deep</p>
-              </div>
-              <div class="dashboard__bars" role="img" aria-label="Telemetry">
-                <span style="--h: 28%"></span>
-                <span style="--h: 46%"></span>
-                <span style="--h: 38%"></span>
-                <span style="--h: 72%"></span>
-                <span style="--h: 64%"></span>
-                <span style="--h: 88%"></span>
-                <span style="--h: 78%"></span>
-                <span style="--h: 92%"></span>
-                <span style="--h: 70%"></span>
-                <span style="--h: 84%"></span>
-              </div>
-              <div class="dashboard__tasks">
-                <p><span aria-hidden="true"></span> draft pillybot landing</p>
-                <p><span class="is-done" aria-hidden="true"></span> ship newsletter copy</p>
-                <p><span aria-hidden="true"></span> reply to recruiter dm</p>
-              </div>
-              <div class="dashboard__claude">
-                <span class="dashboard__claude-tag">claude</span>
-                <p>you slowed at task 2. split it?</p>
-              </div>
+
+              <p class="demo__live" role="status" aria-live="polite" data-live></p>
             </div>
           </div>
 
