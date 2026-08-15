@@ -111,8 +111,11 @@
         if (s.next) {
           // The dwell is reading time, not motion — reduced motion is handled
           // entirely in CSS. Shortening it here would collide two polite
-          // status messages into one announcement window.
-          timer = window.setTimeout(() => api.goTo(s.next.step), s.next.delay);
+          // status messages into one announcement window. The exception is a
+          // dwell that exists to outlast an animation, which passes a function.
+          const delay =
+            typeof s.next.delay === "function" ? s.next.delay() : s.next.delay;
+          timer = window.setTimeout(() => api.goTo(s.next.step), delay);
         }
       },
       clearTimer,
@@ -701,6 +704,212 @@
       if (document.fonts && document.fonts.ready) {
         document.fonts.ready.then(placeToken);
       }
+    }
+  });
+
+  /* ---------- slipstream: a call, a read, and one recommendation ---------- */
+
+  const radio = document.querySelector('[data-demo="radio"]');
+
+  mount("slipstream", () => {
+    if (radio) {
+      // Real readings from the demo session (2024 Hungarian GP, Norris), so the
+      // mockup can't claim anything the tool doesn't actually output. The comms
+      // budget is deliberately identical across all three: the tool never holds
+      // a call back on a weak reading, and flattening that would misrepresent it.
+      const CALLS = [
+        {
+          stamp: "lap 61 · 14:28:17z",
+          clip: "Team radio clip, 6.7 seconds",
+          quote: "“yeah, tell him to catch up then, please.”",
+          state: "energised",
+          z: "+1.69σ",
+          conf: "0.67",
+          voice: "energised at 0.67 confidence",
+          car: "brake variance 42.6",
+          time: "blue flag · car 24",
+          agree: "3 of 3 channels agree.",
+          budget: "26 words · a full briefing fits",
+        },
+        {
+          stamp: "lap 70 · 14:43:14z",
+          clip: "Team radio clip, 11.2 seconds",
+          quote: "“well done, good one, two, good load of points. congrats, t.”",
+          state: "fatigued",
+          z: "−1.36σ",
+          conf: "0.48",
+          voice: "fatigued at 0.48 confidence",
+          car: "brake variance 36.0",
+          time: "no race control for this call",
+          agree: "2 of 3 channels agree.",
+          budget: "26 words · this reading is too weak to hold a call back",
+        },
+        {
+          stamp: "lap 56 · 14:20:31z",
+          clip: "Team radio clip, 16.1 seconds",
+          quote: "“doesn’t matter. i mean, it does. for me, maybe.”",
+          state: "uncertain",
+          z: "−1.18σ",
+          conf: "0.00",
+          voice: "refused · under 1.5s of voiced audio",
+          car: "brake variance 43.3",
+          time: "blue flag · car 20",
+          agree: "The state reading was refused, not produced.",
+          budget: "26 words · state refused, listen to the clip yourself",
+        },
+      ];
+
+      const go = radio.querySelector("[data-go]");
+      const wave = radio.querySelector("[data-wave]");
+      const callBtns = Array.from(radio.querySelectorAll("[data-call]"));
+      const out = {
+        stamp: radio.querySelector("[data-stamp]"),
+        quote: radio.querySelector("[data-quote]"),
+        state: radio.querySelector("[data-state]"),
+        z: radio.querySelector("[data-z]"),
+        conf: radio.querySelector("[data-conf]"),
+        voice: radio.querySelector("[data-ch-voice]"),
+        car: radio.querySelector("[data-ch-car]"),
+        time: radio.querySelector("[data-ch-time]"),
+        verdict: radio.querySelector("[data-verdict]"),
+        budget: radio.querySelector("[data-budget]"),
+      };
+
+      let index = 0;
+      let demo = null;
+
+      const call = () => CALLS[index];
+
+      const write = (node, text) => {
+        if (node) node.textContent = text;
+      };
+
+      // Only the clip and the transcript are known before the pipeline runs;
+      // everything downstream of the read stays blank rather than stale.
+      const paintIdle = () => {
+        const c = call();
+        write(out.stamp, c.stamp);
+        write(out.quote, c.quote);
+        write(out.state, "—");
+        write(out.z, "—");
+        write(out.conf, "—");
+        write(out.voice, "not read yet");
+        write(out.car, c.car);
+        write(out.time, c.time);
+        write(out.verdict, "—");
+        write(out.budget, "waiting on the clip");
+        if (wave) wave.setAttribute("aria-label", c.clip);
+      };
+
+      const paintRead = () => {
+        const c = call();
+        write(out.state, c.state);
+        write(out.z, c.z);
+        write(out.conf, c.conf);
+      };
+
+      const paintComms = () => {
+        const c = call();
+        write(out.voice, c.voice);
+        write(out.verdict, "safe to talk");
+        write(out.budget, c.budget);
+      };
+
+      const setGo = (label, blocked) => {
+        if (!go) return;
+        go.textContent = label;
+        if (blocked) go.setAttribute("aria-disabled", "true");
+        else go.removeAttribute("aria-disabled");
+      };
+
+      // The sweep is CSS; this only has to outlast it. Reduced motion collapses
+      // the animation to nothing, so the dwell shrinks to reading time alone.
+      const clipMs = () => (reduceMotion ? 700 : 2650);
+
+      demo = createDemo(radio, {
+        steps: [
+          {
+            say: () => `${call().stamp}. Clip loaded, not yet read.`,
+            hint: "three calls flagged — try another",
+            enter() {
+              paintIdle();
+              setGo("play the call", false);
+            },
+          },
+          {
+            say: () => `Playing. ${call().quote}`,
+            hint: "",
+            next: { step: 2, delay: clipMs },
+            enter() {
+              setGo("reading the clip", true);
+            },
+          },
+          {
+            say: () =>
+              `Read: ${call().state}, ${call().z} against his own baseline, confidence ${call().conf}.`,
+            hint: "",
+            next: { step: 3, delay: 950 },
+            enter() {
+              paintRead();
+            },
+          },
+          {
+            say: () =>
+              `${call().agree} Comms: safe to talk, ${call().budget.split(" · ")[0]}.`,
+            hint: "",
+            enter() {
+              paintComms();
+              setGo("run it again", false);
+            },
+          },
+        ],
+      });
+
+      if (go) {
+        go.addEventListener("click", () => {
+          if (go.getAttribute("aria-disabled") === "true") return;
+          if (Number(radio.dataset.step) >= 3) demo.goTo(0, { silent: true });
+          demo.goTo(1);
+        });
+      }
+
+      // Same roving-tabindex radiogroup as the aimpact lanes: the queue rows
+      // ship as tabindex="-1" so they aren't announced as operable before this
+      // file runs, and chooseCall owns the tabindex from here on.
+      const syncCalls = () => {
+        callBtns.forEach((btn, i) => {
+          const on = i === index;
+          btn.setAttribute("aria-checked", String(on));
+          btn.tabIndex = on ? 0 : -1;
+        });
+      };
+
+      const chooseCall = (i, focusIt) => {
+        index = i;
+        syncCalls();
+        if (focusIt) callBtns[i].focus();
+        // a different clip is a different reading; nothing from the last one survives
+        demo.goTo(0, { silent: true });
+        demo.say(`${call().stamp} loaded. Play it to read the clip.`);
+      };
+
+      callBtns.forEach((btn, i) => {
+        btn.addEventListener("click", () => chooseCall(i, false));
+        btn.addEventListener("keydown", (e) => {
+          const forward = e.key === "ArrowRight" || e.key === "ArrowDown";
+          const back = e.key === "ArrowLeft" || e.key === "ArrowUp";
+          if (!forward && !back) return;
+          // held arrow keys would reload the clip at the OS repeat rate
+          if (e.repeat) return;
+          e.preventDefault();
+          chooseCall(
+            (i + (forward ? 1 : -1) + callBtns.length) % callBtns.length,
+            true,
+          );
+        });
+      });
+
+      syncCalls();
     }
   });
 })();

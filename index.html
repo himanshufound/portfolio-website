@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#1a1418" />
     <meta
       name="description"
-      content="Himanshu Rawat — student founder building pillybot (a dementia medication companion), focusflow, and aimpact. Product, design, and AI with TypeScript, React, and Python."
+      content="Himanshu Rawat — student founder building pillybot (a dementia medication companion), aimpact, slipstream (F1 team-radio triage), and focusflow. Product, design, and AI with TypeScript, React, and Python."
     />
     <meta property="og:title" content="Himanshu Rawat — Portfolio" />
     <meta
@@ -36,9 +36,9 @@
       rel="stylesheet"
     />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="styles.css?v=5" />
+    <link rel="stylesheet" href="styles.css?v=6" />
     <script src="script.js?v=3" defer></script>
-    <script src="demos.js?v=2" defer></script>
+    <script src="demos.js?v=3" defer></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -221,7 +221,7 @@
         <header class="work__head">
           <p class="section-tag">02 &middot; selected work</p>
           <h2 id="work-heading" class="section-title">
-            Three projects. One soft, one fast, one for good.
+            Four projects. One soft, one for good, one that listens, one fast.
             <em>All shipped.</em>
           </h2>
         </header>
@@ -549,8 +549,234 @@
           </div>
         </article>
 
-        <article class="case case--focusflow">
+        <article class="case case--slipstream">
           <div class="case__index" aria-hidden="true">P/03</div>
+          <div class="case__visual case__visual--carbon">
+            <div
+              class="demo demo--radio"
+              data-demo="radio"
+              data-step="0"
+              role="group"
+              aria-label="slipstream, interactive preview"
+            >
+              <div class="pit">
+                <div class="pit__head">
+                  <span class="pit__driver">
+                    <span class="pit__num" aria-hidden="true">4</span>
+                    <span>nor</span>
+                  </span>
+                  <span class="pit__stamp" data-stamp>lap 61 &middot; 14:28:17z</span>
+                </div>
+
+                <div
+                  class="pit__queue"
+                  role="radiogroup"
+                  aria-label="flagged radio calls"
+                  data-queue
+                >
+                  <button
+                    class="pit__call"
+                    type="button"
+                    role="radio"
+                    aria-checked="true"
+                    tabindex="-1"
+                    data-call="0"
+                  >
+                    <span class="pit__call-lap">l61</span>
+                    <span class="pit__call-z">+1.69</span>
+                  </button>
+                  <button
+                    class="pit__call"
+                    type="button"
+                    role="radio"
+                    aria-checked="false"
+                    tabindex="-1"
+                    data-call="1"
+                  >
+                    <span class="pit__call-lap">l70</span>
+                    <span class="pit__call-z">&minus;1.36</span>
+                  </button>
+                  <button
+                    class="pit__call"
+                    type="button"
+                    role="radio"
+                    aria-checked="false"
+                    tabindex="-1"
+                    data-call="2"
+                  >
+                    <span class="pit__call-lap">l56</span>
+                    <span class="pit__call-z">&minus;1.18</span>
+                  </button>
+                </div>
+
+                <div class="wave" data-wave role="img" aria-label="Team radio clip, 6.7 seconds">
+                  <span style="--i: 0; --a: 22%"></span>
+                  <span style="--i: 1; --a: 40%"></span>
+                  <span style="--i: 2; --a: 64%"></span>
+                  <span style="--i: 3; --a: 88%"></span>
+                  <span style="--i: 4; --a: 58%"></span>
+                  <span style="--i: 5; --a: 34%"></span>
+                  <span style="--i: 6; --a: 46%"></span>
+                  <span style="--i: 7; --a: 76%"></span>
+                  <span style="--i: 8; --a: 96%"></span>
+                  <span style="--i: 9; --a: 70%"></span>
+                  <span style="--i: 10; --a: 38%"></span>
+                  <span style="--i: 11; --a: 26%"></span>
+                  <span style="--i: 12; --a: 52%"></span>
+                  <span style="--i: 13; --a: 84%"></span>
+                  <span style="--i: 14; --a: 100%"></span>
+                  <span style="--i: 15; --a: 66%"></span>
+                  <span style="--i: 16; --a: 44%"></span>
+                  <span style="--i: 17; --a: 30%"></span>
+                  <span style="--i: 18; --a: 56%"></span>
+                  <span style="--i: 19; --a: 78%"></span>
+                  <span style="--i: 20; --a: 62%"></span>
+                  <span style="--i: 21; --a: 42%"></span>
+                  <span style="--i: 22; --a: 28%"></span>
+                  <span style="--i: 23; --a: 20%"></span>
+                  <span class="wave__head" aria-hidden="true"></span>
+                </div>
+
+                <p class="pit__quote" data-quote>
+                  &ldquo;yeah, tell him to catch up then, please.&rdquo;
+                </p>
+
+                <div class="pit__read">
+                  <div class="pit__state">
+                    <p class="pit__k">driver state</p>
+                    <p class="pit__v" data-state>&mdash;</p>
+                  </div>
+                  <dl class="pit__nums">
+                    <div>
+                      <dt>arousal</dt>
+                      <dd data-z>&mdash;</dd>
+                    </div>
+                    <div>
+                      <dt>confidence</dt>
+                      <dd data-conf>&mdash;</dd>
+                    </div>
+                  </dl>
+                </div>
+
+                <ul class="pit__ch" data-channels>
+                  <li class="pit__ch-row">
+                    <span class="pit__ch-k">voice</span>
+                    <span class="pit__ch-v" data-ch-voice>not read yet</span>
+                  </li>
+                  <li class="pit__ch-row">
+                    <span class="pit__ch-k">car</span>
+                    <span class="pit__ch-v" data-ch-car>brake variance 42.6</span>
+                  </li>
+                  <li class="pit__ch-row">
+                    <span class="pit__ch-k">timing</span>
+                    <span class="pit__ch-v" data-ch-time>blue flag &middot; car 24</span>
+                  </li>
+                </ul>
+
+                <div class="pit__comms">
+                  <p class="pit__k">comms &middot; channel capacity, not a driver score</p>
+                  <p class="pit__verdict" data-verdict>&mdash;</p>
+                  <p class="pit__budget" data-budget>waiting on the clip</p>
+                </div>
+
+                <button
+                  class="pit__go"
+                  type="button"
+                  data-go
+                  data-demo-start
+                  data-needs-js
+                  tabindex="-1"
+                >
+                  play the call
+                </button>
+              </div>
+
+              <!-- no replay button here: the panel's own control already resets
+                   the run, and two resets is one too many -->
+              <div class="demo__foot">
+                <p class="demo__hint" data-hint></p>
+              </div>
+
+              <p class="demo__live" role="status" aria-live="polite" data-live></p>
+            </div>
+          </div>
+
+          <div class="case__copy">
+            <p class="case__tag">slipstream</p>
+            <h3 class="case__title">
+              A pit wall tool that says when to listen, not what the driver feels.
+            </h3>
+            <p>
+              Slipstream scores F1 team radio against each driver&rsquo;s own baseline and
+              surfaces the calls worth a second listen. It makes exactly one recommendation
+              &mdash; how much room the comms channel has &mdash; and never rates the driver.
+            </p>
+            <ul class="case__bullets">
+              <li>voice, car telemetry, and race control cross-checked</li>
+              <li>every number traced back to its weight</li>
+              <li>refuses to answer when the audio is weak</li>
+            </ul>
+            <p class="case__metric">
+              <span class="case__metric-num">47</span> radio calls across
+              <span class="case__metric-num">5</span> driver weekends
+            </p>
+            <p class="case__link">
+              <a href="https://goodmaxgram.vercel.app/" target="_blank" rel="noopener noreferrer">
+                view live project
+                <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                  <path
+                    d="M7 17L17 7M7 7h10v10"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </a>
+              <span class="case__link-sep" aria-hidden="true">&middot;</span>
+              <a href="https://github.com/himanshufound/goodmaxgram" target="_blank" rel="noopener noreferrer">
+                source
+                <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                  <path
+                    d="M7 17L17 7M7 7h10v10"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </a>
+            </p>
+          </div>
+        </article>
+
+        <article class="case case--focusflow">
+          <div class="case__index" aria-hidden="true">P/04</div>
+          <div class="case__copy">
+            <p class="case__tag">focusflow</p>
+            <h3 class="case__title">
+              An ADHD productivity workspace with Claude in the passenger seat.
+            </h3>
+            <p>
+              Break work into shorter laps, get out of the pit lane fast, and end a session
+              actually proud of what you did. Claude helps when you stall, never when you don&rsquo;t.
+            </p>
+            <ul class="case__bullets">
+              <li>quick capture, no menu hunting</li>
+              <li>25-minute laps with telemetry, not guilt</li>
+              <li>ai nudges only when momentum drops</li>
+            </ul>
+            <!-- TODO: replace bracketed text with a real, honest number before deploy -->
+            <p class="case__metric case__metric--light">
+              <span class="case__metric-num">[N]</span> focus sessions logged
+            </p>
+            <p class="case__link case__link--light">
+              <a href="https://flow.himanshufr.me/" target="_blank" rel="noopener noreferrer">view project</a>
+            </p>
+          </div>
+
           <div class="case__visual case__visual--dark">
             <div
               class="demo demo--flow"
@@ -669,29 +895,6 @@
 
               <p class="demo__live" role="status" aria-live="polite" data-live></p>
             </div>
-          </div>
-
-          <div class="case__copy">
-            <p class="case__tag">focusflow</p>
-            <h3 class="case__title">
-              An ADHD productivity workspace with Claude in the passenger seat.
-            </h3>
-            <p>
-              Break work into shorter laps, get out of the pit lane fast, and end a session
-              actually proud of what you did. Claude helps when you stall, never when you don&rsquo;t.
-            </p>
-            <ul class="case__bullets">
-              <li>quick capture, no menu hunting</li>
-              <li>25-minute laps with telemetry, not guilt</li>
-              <li>ai nudges only when momentum drops</li>
-            </ul>
-            <!-- TODO: replace bracketed text with a real, honest number before deploy -->
-            <p class="case__metric case__metric--light">
-              <span class="case__metric-num">[N]</span> focus sessions logged
-            </p>
-            <p class="case__link case__link--light">
-              <a href="https://flow.himanshufr.me/" target="_blank" rel="noopener noreferrer">view project</a>
-            </p>
           </div>
         </article>
       </section>
