@@ -420,6 +420,16 @@ main {
   color: var(--ink);
 }
 
+a.hero__meta-value {
+  text-decoration: underline;
+  text-decoration-color: var(--red);
+  text-underline-offset: 3px;
+}
+
+a.hero__meta-value:hover {
+  color: var(--red);
+}
+
 .hero__art {
   position: relative;
   display: grid;
@@ -462,20 +472,42 @@ main {
   letter-spacing: 0.04em;
 }
 
+/* the back card of the stack: tilted the other way and pushed out to the right
+   so a strip of it reads from behind the other two rather than disappearing */
+.hero__photo--tower {
+  grid-column: 1 / span 5;
+  grid-row: 3 / span 6;
+  z-index: 1;
+  transform: rotate(-8deg) translate(-9%, 7%);
+}
+
+.hero__photo--tower figcaption {
+  /* the visible strip is the lower-left corner, so the caption stacks into it */
+  right: auto;
+  left: 14px;
+  bottom: 14px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
 .hero__photo--blossom {
   grid-column: 1 / span 6;
   grid-row: 1 / span 5;
+  z-index: 2;
   transform: rotate(-2deg);
 }
 
 .hero__photo--ferrari {
   grid-column: 4 / span 5;
   grid-row: 4 / span 5;
+  z-index: 3;
   transform: rotate(3deg);
 }
 
 .hero__sticker {
   position: absolute;
+  z-index: 4;
   top: 6%;
   right: -2%;
   display: grid;
@@ -678,7 +710,9 @@ main {
   max-width: 22ch;
 }
 
-.case__copy p {
+/* prose only: `.case__copy p` also outranked .case__tag / .case__link / .case__status
+   on specificity and flattened them to 16px muted body text */
+.case__copy > p:not([class]) {
   font-size: 1.02rem;
   line-height: 1.6;
   color: var(--ink-soft);
@@ -709,27 +743,110 @@ main {
   background: var(--red);
 }
 
-.case__metric {
-  display: inline-flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 12px;
-  padding: 8px 14px;
-  border: 1px solid var(--ink-line);
-  border-radius: 999px;
-  background: oklch(0.99 0.005 80 / 0.6);
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--ink-soft);
-  letter-spacing: -0.005em;
+/* proof ledger — the three facts a recruiter or investor scans for, set like a
+   timing sheet rather than a stat grid: label, dotted leader, value. The leader
+   does the work a card would otherwise do, so the facts sit inside the copy
+   column instead of becoming a second component competing with the demo. */
+.proof {
+  display: grid;
+  gap: 11px;
+  margin-top: 6px;
+  max-width: 32rem;
+  padding-top: 16px;
+  border-top: 1px solid var(--ink-line);
 }
 
-.case__metric-num {
+.proof__row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.proof__row dt {
+  font-family: "Inter", sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+/* the leader is a flex spacer, so a long label simply eats it rather than
+   pushing the value off the row */
+.proof__lead {
+  flex: 1 1 18px;
+  min-width: 14px;
+  height: 1px;
+  translate: 0 -0.3em;
+  background: repeating-linear-gradient(
+    to right,
+    var(--ink-line) 0 2px,
+    transparent 2px 7px
+  );
+}
+
+.proof__row dd {
   font-family: "Fraunces", serif;
   font-weight: 900;
-  font-size: 1.05rem;
+  font-size: 1.18rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
   color: var(--red);
+  white-space: nowrap;
+}
+
+.case__tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.case__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: oklch(0.16 0.02 25 / 0.055);
+  font-family: "Inter", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.case__status::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--red);
+}
+
+/* narrow: a two-line label leaves the leader as a 15px stub, so the rule moves
+   under the row instead of between the label and its value */
+@media (max-width: 520px) {
+  .proof {
+    gap: 0;
+  }
+
+  .proof__row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--ink-line);
+  }
+
+  .proof__row:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .proof__lead {
+    display: none;
+  }
 }
 
 .case__link {

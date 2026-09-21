@@ -6,12 +6,12 @@
     <meta name="theme-color" content="#1a1418" />
     <meta
       name="description"
-      content="Himanshu Rawat — student founder building pillybot (a dementia medication companion), aimpact, slipstream (F1 team-radio triage), and focusflow. Product, design, and AI with TypeScript, React, and Python."
+      content="Himanshu Rawat — student founder building pillybot (a dementia medication companion, 200+ families in early access), aimpact (nonprofit tasks for AI volunteers), the silent co-driver (F1 team-radio triage), and focusflow. Product, design, and AI with TypeScript, React, and Python."
     />
     <meta property="og:title" content="Himanshu Rawat — Portfolio" />
     <meta
       property="og:description"
-      content="Personal portfolio of Himanshu Rawat. Selected work, contact, and a personal introduction."
+      content="Himanshu Rawat — student founder building pillybot (a dementia medication companion, 200+ families in early access), aimpact (nonprofit tasks for AI volunteers), the silent co-driver (F1 team-radio triage), and focusflow."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://himanshufr.me/" />
@@ -19,11 +19,12 @@
     <meta property="og:image" content="https://himanshufr.me/images/og.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Himanshu Rawat — soft like sakura, fast like ferrari" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Himanshu Rawat — Portfolio" />
     <meta
       name="twitter:description"
-      content="Personal portfolio of Himanshu Rawat. Selected work, contact, and a personal introduction."
+      content="Himanshu Rawat — student founder building pillybot (a dementia medication companion, 200+ families in early access), aimpact (nonprofit tasks for AI volunteers), the silent co-driver (F1 team-radio triage), and focusflow."
     />
     <meta name="twitter:image" content="https://himanshufr.me/images/og.jpg" />
     <link rel="canonical" href="https://himanshufr.me/" />
@@ -36,7 +37,8 @@
       rel="stylesheet"
     />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="styles.css?v=6" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <link rel="stylesheet" href="styles.css?v=7" />
     <script src="script.js?v=3" defer></script>
     <script src="demos.js?v=3" defer></script>
     <script type="application/ld+json">
@@ -116,7 +118,7 @@
             </li>
             <li>
               <span class="hero__meta-label">shipping</span>
-              <span class="hero__meta-value">pillybot.app</span>
+              <a class="hero__meta-value" href="https://www.pillybot.app" target="_blank" rel="noopener noreferrer">pillybot.app</a>
             </li>
             <li>
               <span class="hero__meta-label">obsessed with</span>
@@ -126,6 +128,20 @@
         </div>
 
         <div class="hero__art" aria-hidden="true">
+          <figure class="hero__photo hero__photo--tower">
+            <img
+              src="images/hero-canton.jpg"
+              alt="Guangzhou skyline at sunset from the Canton Tower observation deck"
+              width="675"
+              height="1200"
+              loading="eager"
+            />
+            <figcaption>
+              <span>guangzhou</span>
+              <span>canton tower</span>
+            </figcaption>
+          </figure>
+
           <figure class="hero__photo hero__photo--blossom">
             <img
               src="images/hero-mountains.jpg"
@@ -147,7 +163,7 @@
               alt="Audi R8 on a mountain road at Akinayama"
               width="820"
               height="1093"
-              loading="lazy"
+              loading="eager"
             />
             <figcaption>
               <span>akinayama</span>
@@ -193,7 +209,7 @@
 
         <div class="about__grid">
           <p class="about__lead">
-            I build things that solve real problems — mine first, and hopefully yours too. Every project here started with something that bothered me or excited me enough that I had to do something about it. This is that something. Take a look around, or shoot me a DM.
+            I build things that solve real problems — mine first, and hopefully yours too. Every project here started with something that bothered me or excited me enough that I had to do something about it. This is that something. Take a look around, or send me an email.
           </p>
 
           <dl class="about__facts">
@@ -355,23 +371,41 @@
           </div>
 
           <div class="case__copy">
-            <p class="case__tag">pillybot</p>
+            <div class="case__tags">
+              <p class="case__tag">pillybot</p>
+              <p class="case__status">early access</p>
+            </div>
             <h3 class="case__title">
-              Medication and health, gently kept track of for people with dementia.
+              The daughter sets it up in five minutes. Her mother never meets the complexity.
             </h3>
             <p>
-              A companion app that holds medication, vitals, and family check-ins in one calm place.
-              It tries to feel like a kind nurse, not a chart.
+              Pilly holds medication, vitals, and routine for elderly and dementia users, and keeps
+              family and doctors on the same page without a group chat. You photograph the
+              prescriptions once &mdash; it handles the reminder, the second nudge, and the quiet
+              note home if a dose is missed.
             </p>
             <ul class="case__bullets">
-              <li>conversational reminders, never robotic</li>
-              <li>family view that protects dignity</li>
-              <li>large type, soft motion, no scary alerts</li>
+              <li>set up by the caregiver, lived in by the patient</li>
+              <li>a gentler second nudge before family is ever told</li>
+              <li>doctor-ready adherence data, exported on the patient&rsquo;s terms</li>
             </ul>
-            <!-- TODO: replace bracketed text with a real, honest number before deploy -->
-            <p class="case__metric">
-              <span class="case__metric-num">[N]</span> families in private beta
-            </p>
+            <dl class="proof">
+              <div class="proof__row">
+                <dt>families in early access</dt>
+                <span class="proof__lead" aria-hidden="true"></span>
+                <dd>200+</dd>
+              </div>
+              <div class="proof__row">
+                <dt>languages shipped</dt>
+                <span class="proof__lead" aria-hidden="true"></span>
+                <dd>14</dd>
+              </div>
+              <div class="proof__row">
+                <dt>prescription photo to first reminder</dt>
+                <span class="proof__lead" aria-hidden="true"></span>
+                <dd>5 min</dd>
+              </div>
+            </dl>
             <p class="case__link">
               <a href="https://www.pillybot.app" target="_blank" rel="noopener noreferrer">
                 pillybot.app
@@ -393,25 +427,41 @@
         <article class="case case--aimpact">
           <div class="case__index" aria-hidden="true">P/02</div>
           <div class="case__copy">
-            <p class="case__tag">aimpact</p>
+            <div class="case__tags">
+              <p class="case__tag">aimpact</p>
+              <p class="case__status">live &middot; open board</p>
+            </div>
             <h3 class="case__title">
               A volunteer board where your AI can help nonprofits too.
             </h3>
             <p>
-              A public board of small, well-scoped nonprofit tasks &mdash; a landing page, a logo,
-              a grant edit. Humans claim them. AI agents claim them. Either way, a human at the
-              nonprofit reviews the work before it ships.
+              A public board of small, well-scoped nonprofit tasks &mdash; a one-page site, a logo,
+              an edited grant. People claim them the usual way. Agents claim them through one pasted
+              prompt or a typed MCP endpoint. Either way, a human at the nonprofit reads the work
+              before anyone uses it.
             </p>
             <ul class="case__bullets">
-              <li>one prompt gets an ai agent volunteering</li>
-              <li>guided templates instead of vague briefs</li>
-              <li>nothing ships without a human review</li>
+              <li>one prompt, or an mcp server, turns any agent into a volunteer</li>
+              <li>templated briefs, so nothing is left to guess at</li>
+              <li>the board is a helping hand, never an autopilot</li>
             </ul>
-            <!-- TODO: replace bracketed text with real, honest numbers before deploy -->
-            <p class="case__metric">
-              <span class="case__metric-num">[N]</span> tasks completed for
-              <span class="case__metric-num">[M]</span> nonprofits
-            </p>
+            <dl class="proof">
+              <div class="proof__row">
+                <dt>to turn an agent into a volunteer</dt>
+                <span class="proof__lead" aria-hidden="true"></span>
+                <dd>1 prompt</dd>
+              </div>
+              <div class="proof__row">
+                <dt>work published without a human reading it</dt>
+                <span class="proof__lead" aria-hidden="true"></span>
+                <dd>0</dd>
+              </div>
+              <div class="proof__row">
+                <dt>cost to a nonprofit, always</dt>
+                <span class="proof__lead" aria-hidden="true"></span>
+                <dd>free</dd>
+              </div>
+            </dl>
             <p class="case__link">
               <a href="https://aimpact.himanshufr.me/" target="_blank" rel="noopener noreferrer">
                 view live project
@@ -557,7 +607,7 @@
               data-demo="radio"
               data-step="0"
               role="group"
-              aria-label="slipstream, interactive preview"
+              aria-label="the silent co-driver, interactive preview"
             >
               <div class="pit">
                 <div class="pit__head">
@@ -702,41 +752,44 @@
           </div>
 
           <div class="case__copy">
-            <p class="case__tag">slipstream</p>
+            <div class="case__tags">
+              <p class="case__tag">the silent co-driver</p>
+              <p class="case__status">live demo</p>
+            </div>
             <h3 class="case__title">
               A pit wall tool that says when to listen, not what the driver feels.
             </h3>
             <p>
-              Slipstream scores F1 team radio against each driver&rsquo;s own baseline and
-              surfaces the calls worth a second listen. It makes exactly one recommendation
-              &mdash; how much room the comms channel has &mdash; and never rates the driver.
+              It scores F1 team radio against each driver&rsquo;s own baseline and ranks the calls
+              worth a second listen &mdash; across every driver in the same session, so a difference
+              is a difference between people, not between races. It recommends exactly one thing:
+              how much room the comms channel has. Never a rating of the driver.
             </p>
             <ul class="case__bullets">
-              <li>voice, car telemetry, and race control cross-checked</li>
-              <li>every number traced back to its weight</li>
-              <li>refuses to answer when the audio is weak</li>
+              <li>voice, car telemetry, and race control cross-checked before anything is flagged</li>
+              <li>every score decomposed into the exact feature weights that produced it</li>
+              <li>refuses to answer when the audio is too thin to read</li>
             </ul>
-            <p class="case__metric">
-              <span class="case__metric-num">47</span> radio calls across
-              <span class="case__metric-num">5</span> driver weekends
-            </p>
+            <dl class="proof">
+              <div class="proof__row">
+                <dt>known-answer tests passed</dt>
+                <span class="proof__lead" aria-hidden="true"></span>
+                <dd>94/104</dd>
+              </div>
+              <div class="proof__row">
+                <dt>accuracy on 6 weekends never tuned on</dt>
+                <span class="proof__lead" aria-hidden="true"></span>
+                <dd>91%</dd>
+              </div>
+              <div class="proof__row">
+                <dt>arousal AUC, CREMA-D benchmark</dt>
+                <span class="proof__lead" aria-hidden="true"></span>
+                <dd>0.862</dd>
+              </div>
+            </dl>
             <p class="case__link">
               <a href="https://goodmaxgram.vercel.app/" target="_blank" rel="noopener noreferrer">
                 view live project
-                <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
-                  <path
-                    d="M7 17L17 7M7 7h10v10"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </a>
-              <span class="case__link-sep" aria-hidden="true">&middot;</span>
-              <a href="https://github.com/himanshufound/goodmaxgram" target="_blank" rel="noopener noreferrer">
-                source
                 <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
                   <path
                     d="M7 17L17 7M7 7h10v10"
@@ -755,25 +808,54 @@
         <article class="case case--focusflow">
           <div class="case__index" aria-hidden="true">P/04</div>
           <div class="case__copy">
-            <p class="case__tag">focusflow</p>
+            <div class="case__tags">
+              <p class="case__tag">focusflow</p>
+              <p class="case__status">v0.2 &middot; byok</p>
+            </div>
             <h3 class="case__title">
               An ADHD productivity workspace with Claude in the passenger seat.
             </h3>
             <p>
-              Break work into shorter laps, get out of the pit lane fast, and end a session
-              actually proud of what you did. Claude helps when you stall, never when you don&rsquo;t.
+              Six small rooms &mdash; chat, focus, brain dump, timer, check-in, settings &mdash; and
+              nothing else to get lost in. Claude answers in bite-sized cards instead of a wall of
+              text, running on your own key, on your own machine.
             </p>
             <ul class="case__bullets">
               <li>quick capture, no menu hunting</li>
-              <li>25-minute laps with telemetry, not guilt</li>
-              <li>ai nudges only when momentum drops</li>
+              <li>replies you can actually finish reading</li>
+              <li>your api key, your machine, no backend of mine</li>
             </ul>
-            <!-- TODO: replace bracketed text with a real, honest number before deploy -->
-            <p class="case__metric case__metric--light">
-              <span class="case__metric-num">[N]</span> focus sessions logged
-            </p>
-            <p class="case__link case__link--light">
-              <a href="https://flow.himanshufr.me/" target="_blank" rel="noopener noreferrer">view project</a>
+            <dl class="proof">
+              <div class="proof__row">
+                <dt>rooms, and no more</dt>
+                <span class="proof__lead" aria-hidden="true"></span>
+                <dd>6</dd>
+              </div>
+              <div class="proof__row">
+                <dt>keys or data on my servers</dt>
+                <span class="proof__lead" aria-hidden="true"></span>
+                <dd>0</dd>
+              </div>
+              <div class="proof__row">
+                <dt>current build</dt>
+                <span class="proof__lead" aria-hidden="true"></span>
+                <dd>v0.2</dd>
+              </div>
+            </dl>
+            <p class="case__link">
+              <a href="https://flow.himanshufr.me/" target="_blank" rel="noopener noreferrer">
+                open focusflow
+                <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                  <path
+                    d="M7 17L17 7M7 7h10v10"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </a>
             </p>
           </div>
 
