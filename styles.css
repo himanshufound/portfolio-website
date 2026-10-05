@@ -87,7 +87,8 @@ button {
   pointer-events: none;
   z-index: 1;
   opacity: 0.5;
-  mix-blend-mode: multiply;
+  /* no mix-blend-mode: multiply of this ~9%-alpha near-black noise differs from
+     plain alpha by <1% per channel, but forced a full-viewport re-blend on scroll */
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.05 0 0 0 0 0.05 0 0 0 0.18 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
 }
 
@@ -445,6 +446,11 @@ a.hero__meta-value:hover {
   overflow: hidden;
   box-shadow: var(--shadow-lg);
   border: 1px solid oklch(0.99 0.005 80 / 0.4);
+}
+
+/* the <picture> wrapper must not become a box, or img height: 100% collapses */
+.hero__photo picture {
+  display: contents;
 }
 
 .hero__photo img {

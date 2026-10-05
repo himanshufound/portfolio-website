@@ -38,7 +38,7 @@
     />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-    <link rel="stylesheet" href="styles.css?v=7" />
+    <link rel="stylesheet" href="styles.css?v=8" />
     <script src="script.js?v=3" defer></script>
     <script src="demos.js?v=3" defer></script>
     <script type="application/ld+json">
@@ -129,13 +129,17 @@
 
         <div class="hero__art" aria-hidden="true">
           <figure class="hero__photo hero__photo--tower">
-            <img
-              src="images/hero-canton.jpg"
-              alt="Guangzhou skyline at sunset from the Canton Tower observation deck"
-              width="675"
-              height="1200"
-              loading="eager"
-            />
+            <picture>
+              <source srcset="images/hero-canton.webp" type="image/webp" />
+              <img
+                src="images/hero-canton.jpg"
+                alt="Guangzhou skyline at sunset from the Canton Tower observation deck"
+                width="675"
+                height="1200"
+                loading="eager"
+                decoding="async"
+              />
+            </picture>
             <figcaption>
               <span>guangzhou</span>
               <span>canton tower</span>
@@ -143,14 +147,17 @@
           </figure>
 
           <figure class="hero__photo hero__photo--blossom">
-            <img
-              src="images/hero-mountains.jpg"
-              alt="Snowy Kashmir mountain landscape on a winter walk"
-              width="820"
-              height="1457"
-              loading="eager"
-              fetchpriority="high"
-            />
+            <picture>
+              <source srcset="images/hero-mountains.webp" type="image/webp" />
+              <img
+                src="images/hero-mountains.jpg"
+                alt="Snowy Kashmir mountain landscape on a winter walk"
+                width="820"
+                height="1457"
+                loading="eager"
+                fetchpriority="high"
+              />
+            </picture>
             <figcaption>
               <span>kashmir</span>
               <span>winter walks</span>
@@ -158,13 +165,17 @@
           </figure>
 
           <figure class="hero__photo hero__photo--ferrari">
-            <img
-              src="images/hero-r8.jpg"
-              alt="Audi R8 on a mountain road at Akinayama"
-              width="820"
-              height="1093"
-              loading="eager"
-            />
+            <picture>
+              <source srcset="images/hero-r8.webp" type="image/webp" />
+              <img
+                src="images/hero-r8.jpg"
+                alt="Audi R8 on a mountain road at Akinayama"
+                width="820"
+                height="1093"
+                loading="eager"
+                decoding="async"
+              />
+            </picture>
             <figcaption>
               <span>akinayama</span>
               <span>1,273 m</span>
