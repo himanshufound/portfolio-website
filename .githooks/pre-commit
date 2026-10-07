@@ -1,0 +1,11 @@
+#!/bin/sh
+# Stamp each asset's content hash into its ?v= query in index.html, so the
+# year-long immutable cache in vercel.json never serves a stale file.
+# Enable once per clone: git config core.hooksPath .githooks
+set -e
+for f in styles.css script.js demos.js fonts/fonts.css; do
+  v=$(git show ":$f" | shasum | cut -c1-8)
+  perl -pi -e "s#\Q$f\E\?v=[^\"]*#$f?v=$v#g" index.html
+done
+# ponytail: re-stages all of index.html, including any unstaged edits to it
+git add index.html

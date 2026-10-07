@@ -18,6 +18,13 @@ npm run dev
 
 Serves the site at http://localhost:4173 via `npx serve`.
 
+Once per clone, enable the hook that stamps asset hashes into `index.html`
+(CSS/JS are cached for a year, so their `?v=` must change with their content):
+
+```bash
+git config core.hooksPath .githooks
+```
+
 ## Structure
 
 - `index.html` — single-page site (hero, about, work, contact)
