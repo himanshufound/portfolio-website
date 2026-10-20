@@ -5,6 +5,35 @@
   if (yearNode) yearNode.textContent = String(new Date().getFullYear());
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const typer = document.querySelector("[data-typer]");
+  if (typer && !reduceMotion) {
+    const lines = [
+      "hey claude, how many people viewing my portfolio",
+      "claude, will this website land me an internship",
+      "hey claude, should i major in ai instead",
+      "i\u2019m now available in mandarin",
+    ];
+    let line = 0;
+    let shown = 0;
+    let deleting = false;
+    const tick = () => {
+      const text = lines[line];
+      shown += deleting ? -1 : 1;
+      typer.textContent = text.slice(0, shown);
+      let wait = deleting ? 22 : 45 + Math.random() * 45;
+      if (!deleting && shown === text.length) {
+        deleting = true;
+        wait = 2400;
+      } else if (deleting && shown === 0) {
+        deleting = false;
+        line = (line + 1) % lines.length;
+        wait = 400;
+      }
+      setTimeout(tick, wait);
+    };
+    setTimeout(tick, 2400);
+  }
+
   const petalField = document.querySelector(".petals");
 
   if (petalField && !reduceMotion) {
