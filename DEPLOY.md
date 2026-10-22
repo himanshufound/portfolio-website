@@ -13,6 +13,8 @@ npm run dev          # old preview of the repo root (no blog pages)
 
 `npm run preview` runs `wrangler pages dev`. It honours `_redirects` and `_headers` and needs no Cloudflare account.
 
+Always deploy by pushing to git, so Cloudflare builds from a clean clone. Never upload a local `dist/` (`wrangler pages deploy`). `build.mjs` only copies the files listed in `PUBLIC`, but a clean clone is the second safeguard.
+
 ## Cloudflare Pages settings
 
 | Setting | Value |

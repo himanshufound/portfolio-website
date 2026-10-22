@@ -20,3 +20,8 @@ npm-debug.log*
 # build output
 dist/
 .wrangler/
+
+# private working files, never publish
+improved-plan.md
+income-tracker.csv
+invoice.html

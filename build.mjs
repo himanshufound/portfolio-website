@@ -10,11 +10,13 @@ const SITE = "https://himanshufr.me";
 const AUTHOR = "Himanshu Rawat";
 const OUT = "dist";
 
-// Never copied into dist/: dotfiles (.git, .wrangler, ...), tooling, source content, docs,
-// and Vercel-only config.
-const SKIP = new Set([
-  "node_modules", "content", OUT, "build.mjs", "package.json", "package-lock.json", "vercel.json",
-]);
+// The only repo-root entries that get published. An allowlist, so private or scratch files
+// dropped in the folder (invoices, notes, CSVs) never reach dist/. Add new public files here.
+const PUBLIC = [
+  "index.html", "zh.html", "styles.css", "script.js", "demos.js", "prose.css",
+  "favicon.svg", "apple-touch-icon.png", "resume.pdf", "robots.txt", "_redirects", "_headers",
+  "fonts", "images", "audio",
+];
 
 const esc = (s) =>
   String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
@@ -115,8 +117,7 @@ ${body}
 // 1. Copy the static site.
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(OUT);
-for (const name of fs.readdirSync(".")) {
-  if (SKIP.has(name) || name.startsWith(".") || name.endsWith(".md")) continue;
+for (const name of PUBLIC) {
   fs.cpSync(name, path.join(OUT, name), {
     recursive: true,
     filter: (src) => path.basename(src) !== ".DS_Store",
