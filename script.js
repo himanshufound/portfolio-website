@@ -5,9 +5,15 @@
   if (yearNode) yearNode.textContent = String(new Date().getFullYear());
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const zh = document.documentElement.lang === "zh-CN";
   const typer = document.querySelector("[data-typer]");
   if (typer && !reduceMotion) {
-    const lines = [
+    const lines = zh ? [
+      "claude，这个网站能帮我拿到实习吗",
+      "claude，有多少人在看我的作品集",
+      "claude，我该不该改学 ai",
+      "我现在也会说中文了",
+    ] : [
       "hey claude, how many people viewing my portfolio",
       "claude, will this website land me an internship",
       "hey claude, should i major in ai instead",
@@ -152,7 +158,7 @@
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "player__track";
-      btn.setAttribute("aria-label", `Play ${track.title} by ${track.artist}`);
+      btn.setAttribute("aria-label", zh ? `播放 ${track.artist} 的 ${track.title}` : `Play ${track.title} by ${track.artist}`);
       btn.innerHTML =
         `<span class="player__track-num">${String(i + 1).padStart(2, "0")}</span>` +
         `<span class="player__track-meta">` +
@@ -241,18 +247,18 @@
     muteBtn.addEventListener("click", () => {
       audio.muted = !audio.muted;
       root.classList.toggle("is-muted", audio.muted);
-      muteBtn.setAttribute("aria-label", audio.muted ? "Unmute" : "Mute");
+      muteBtn.setAttribute("aria-label", audio.muted ? (zh ? "取消静音" : "Unmute") : (zh ? "静音" : "Mute"));
     });
 
     // ----- audio events -----
     audio.addEventListener("play", () => {
       root.classList.add("is-playing");
-      toggleBtn.setAttribute("aria-label", "Pause");
+      toggleBtn.setAttribute("aria-label", zh ? "暂停" : "Pause");
     });
 
     audio.addEventListener("pause", () => {
       root.classList.remove("is-playing");
-      toggleBtn.setAttribute("aria-label", "Play");
+      toggleBtn.setAttribute("aria-label", zh ? "播放" : "Play");
     });
 
     audio.addEventListener("loadedmetadata", () => {

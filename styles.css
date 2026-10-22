@@ -3204,3 +3204,8 @@ a.hero__meta-value:hover,
   .petals { display: none; }
   .marquee__track { animation: none !important; }
 }
+
+/* zh.html: Chinese has no italic face, and a synthetic slant only smears it */
+:lang(zh) em {
+  font-style: normal;
+}

@@ -28,6 +28,7 @@ git config core.hooksPath .githooks
 ## Structure
 
 - `index.html` — single-page site (hero, about, work, contact)
+- `zh.html` — simplified Chinese copy of `index.html`, served at `/zh`; JS strings switch on `<html lang="zh-CN">`
 - `styles.css` — all styling (design tokens, layout, animations)
 - `script.js` — petals, smooth scroll, scroll reveals, music player
 - `images/` — hero art (PNG + optimized JPEG)

@@ -10,6 +10,78 @@
 
   /* ---------- shared ---------- */
 
+  // zh.html sets lang="zh-CN"; any string missing here stays English
+  const zh = document.documentElement.lang === "zh-CN";
+  const ZH = zh
+    ? {
+        " — show the next message": "，点一下看下一条",
+        "Reminder reset. Donepezil is due after breakfast.": "提醒已重置。早饭后该吃多奈哌齐了。",
+        "try the reminder": "点一下提醒",
+        "Mark as taken:": "标记为已服用：",
+        "Ticked off today's list.": "今天的清单已勾掉。",
+        "Taken:": "已服用：",
+        "Mom notified. pillybot sent the family a quiet update.": "已通知妈妈。pillybot 悄悄给家人发了一条更新。",
+        "try the message": "点一下消息",
+        "run it again": "再来一次",
+        "resume": "继续",
+        "pause": "暂停",
+        "start the lap": "开始这一圈",
+        "Momentum dropped. Claude suggests splitting the task.": "节奏掉了。Claude 建议把任务拆开。",
+        "Task split in two. Focus back to deep.": "任务一分为二。专注回到深度状态。",
+        "nothing ticked. the lap still counts.": "一个都没勾。这一圈照样算数。",
+        "lap 03 / 04": "第 03 / 04 圈",
+        "lap 04 / 04": "第 04 / 04 圈",
+        "Lap started. 25 minutes.": "这一圈开始了。25 分钟。",
+        "Lap complete.": "这一圈完成。",
+        "Lap paused.": "这一圈已暂停。",
+        "Lap resumed.": "这一圈已继续。",
+        "task": "任务",
+        live: "上线",
+        "the work": "作品",
+        agent: "智能体",
+        you: "你",
+        "Task posted, unclaimed.": "任务已发布，暂无人认领。",
+        "send an agent": "派一个智能体",
+        "claim it": "认领它",
+        "An AI agent claimed the task.": "一个 AI 智能体认领了任务。",
+        "You claimed the task.": "你认领了任务。",
+        "hand in the work": "提交作品",
+        "Handed in. A human at Clean Water Trust is reviewing it.": "已提交。清水信托的一位工作人员正在审核。",
+        "a human is reviewing": "人工审核中",
+        "Approved by a person, then shipped. Eleven tasks left open.": "人工审核通过后上线。还有十一个任务待认领。",
+        "An AI agent will take it. The journey resets.": "交给 AI 智能体。流程重新开始。",
+        "A human will take it. The journey resets.": "交给真人。流程重新开始。",
+        "Team radio clip, 6.7 seconds": "车队无线电片段，6.7 秒",
+        "Team radio clip, 11.2 seconds": "车队无线电片段，11.2 秒",
+        "Team radio clip, 16.1 seconds": "车队无线电片段，16.1 秒",
+        energised: "亢奋",
+        fatigued: "疲惫",
+        uncertain: "不确定",
+        "energised at 0.67 confidence": "亢奋，置信度 0.67",
+        "fatigued at 0.48 confidence": "疲惫，置信度 0.48",
+        "refused · under 1.5s of voiced audio": "拒绝判断 · 有效语音不足 1.5 秒",
+        "brake variance 42.6": "刹车方差 42.6",
+        "brake variance 36.0": "刹车方差 36.0",
+        "brake variance 43.3": "刹车方差 43.3",
+        "blue flag · car 24": "蓝旗 · 24 号车",
+        "blue flag · car 20": "蓝旗 · 20 号车",
+        "no race control for this call": "这次通话没有赛事干预",
+        "3 of 3 channels agree.": "三个信号源全部一致。",
+        "2 of 3 channels agree.": "三个信号源中两个一致。",
+        "The state reading was refused, not produced.": "状态判断被拒绝，没有给出结果。",
+        "26 words · a full briefing fits": "26 字 · 完整简报放得下",
+        "26 words · this reading is too weak to hold a call back": "26 字 · 这次判断太弱，不足以压下一次通话",
+        "26 words · state refused, listen to the clip yourself": "26 字 · 状态拒绝判断，请自己听片段",
+        "not read yet": "尚未判断",
+        "waiting on the clip": "等待片段",
+        "safe to talk": "可以通话",
+        "three calls flagged — try another": "标记了三段通话，换一段试试",
+        "play the call": "播放通话",
+        "reading the clip": "正在判断片段",
+      }
+    : {};
+  const tr = (s) => ZH[s] || s;
+
   const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   let reduceMotion = motionQuery.matches;
   if (typeof motionQuery.addEventListener === "function") {
@@ -175,7 +247,7 @@
         if (!chat) return;
         chat.setAttribute(
           "aria-label",
-          swapText(chatSwap, chatIndex) + " — show the next message",
+          swapText(chatSwap, chatIndex) + tr(" — show the next message"),
         );
       };
 
@@ -189,8 +261,8 @@
       demo = createDemo(pilly, {
         steps: [
           {
-            say: "Reminder reset. Donepezil is due after breakfast.",
-            hint: "try the reminder",
+            say: tr("Reminder reset. Donepezil is due after breakfast."),
+            hint: tr("try the reminder"),
             enter() {
               swapTo(doseMeta, 0);
               swapTo(family, 0);
@@ -198,22 +270,22 @@
               if (dose) dose.removeAttribute("aria-disabled");
               // the button's name comes from its own visible text; this prefix
               // only supplies the verb, so "1 tab" stays in the name (WCAG 2.5.3)
-              if (doseAction) doseAction.textContent = "Mark as taken:";
+              if (doseAction) doseAction.textContent = tr("Mark as taken:");
             },
           },
           {
-            say: "Ticked off today's list.",
+            say: tr("Ticked off today's list."),
             hint: "",
             next: { step: 2, delay: 1150 },
             enter() {
               swapTo(doseMeta, 1);
               if (dose) dose.setAttribute("aria-disabled", "true");
-              if (doseAction) doseAction.textContent = "Taken:";
+              if (doseAction) doseAction.textContent = tr("Taken:");
             },
           },
           {
-            say: "Mom notified. pillybot sent the family a quiet update.",
-            hint: "try the message",
+            say: tr("Mom notified. pillybot sent the family a quiet update."),
+            hint: tr("try the message"),
             replay: true,
             enter() {
               swapTo(family, 1);
@@ -307,10 +379,10 @@
 
       const setLabel = () => {
         if (!startLabel) return;
-        if (flow.dataset.step === "2") startLabel.textContent = "run it again";
+        if (flow.dataset.step === "2") startLabel.textContent = tr("run it again");
         else if (flow.dataset.step === "1")
-          startLabel.textContent = paused ? "resume" : "pause";
-        else startLabel.textContent = "start the lap";
+          startLabel.textContent = tr(paused ? "resume" : "pause");
+        else startLabel.textContent = tr("start the lap");
       };
 
       const paintBars = (progress) => {
@@ -338,7 +410,7 @@
         swapTo(claudeSwap, 1);
         if (splitAction) splitAction.hidden = false;
         if (demo)
-          demo.say("Momentum dropped. Claude suggests splitting the task.");
+          demo.say(tr("Momentum dropped. Claude suggests splitting the task."));
       };
 
       const applySplit = () => {
@@ -361,7 +433,7 @@
           const heir = splits.querySelector("[data-task]");
           if (heir) heir.focus();
         }
-        if (demo) demo.say("Task split in two. Focus back to deep.");
+        if (demo) demo.say(tr("Task split in two. Focus back to deep."));
       };
 
       // claude's closing line has to match what the visitor actually ticked
@@ -381,8 +453,10 @@
         const word = (n) => NUMBER[n] || String(n);
         line.textContent =
           done === 0
-            ? "nothing ticked. the lap still counts."
-            : `${word(done)} of ${word(shown.length)} done. that’s a lap.`;
+            ? tr("nothing ticked. the lap still counts.")
+            : zh
+              ? `完成 ${done} / ${shown.length}。这就是一圈。`
+              : `${word(done)} of ${word(shown.length)} done. that’s a lap.`;
       };
 
       const stop = () => {
@@ -433,7 +507,7 @@
               flow.classList.remove("is-paused");
               flow.dataset.nudge = "idle";
               timeNode.textContent = clock(LAP_SECONDS);
-              lapNode.textContent = "lap 03 / 04";
+              lapNode.textContent = tr("lap 03 / 04");
               restBars();
               swapTo(focusSwap, 0);
               swapTo(claudeSwap, 0);
@@ -449,11 +523,11 @@
             },
           },
           {
-            say: "Lap started. 25 minutes.",
+            say: tr("Lap started. 25 minutes."),
             enter() {
               lapDuration = chooseLapDuration();
               wantsRun = true;
-              lapNode.textContent = "lap 04 / 04";
+              lapNode.textContent = tr("lap 04 / 04");
               swapTo(focusSwap, 1);
               paintBars(0);
               setLabel();
@@ -461,7 +535,7 @@
             },
           },
           {
-            say: "Lap complete.",
+            say: tr("Lap complete."),
             enter() {
               wantsRun = false;
               stop();
@@ -491,10 +565,10 @@
             setLabel();
             if (paused) {
               stop();
-              demo.say("Lap paused.");
+              demo.say(tr("Lap paused."));
             } else {
               run();
-              demo.say("Lap resumed.");
+              demo.say(tr("Lap resumed."));
             }
           } else {
             demo.goTo(0);
@@ -510,8 +584,12 @@
           const done = task.getAttribute("aria-pressed") === "true";
           task.setAttribute("aria-pressed", String(!done));
           const label = task.querySelector(".dashboard__task-label");
-          const name = label ? label.textContent.trim() : "task";
-          demo.say(done ? `${name} reopened.` : `${name} done.`);
+          const name = label ? label.textContent.trim() : tr("task");
+          demo.say(
+            zh
+              ? `${name}，${done ? "已重新打开" : "已完成"}。`
+              : done ? `${name} reopened.` : `${name} done.`,
+          );
         });
       });
 
@@ -554,9 +632,9 @@
       const lane = () => board.dataset.lane;
 
       const tokenLabel = (step) => {
-        if (step >= 3) return "live";
-        if (step === 2) return "the work";
-        return lane() === "agent" ? "agent" : "you";
+        if (step >= 3) return tr("live");
+        if (step === 2) return tr("the work");
+        return tr(lane() === "agent" ? "agent" : "you");
       };
 
       // measured rather than computed: the rail is fluid and the pill's width
@@ -595,43 +673,45 @@
       demo = createDemo(board, {
         steps: [
           {
-            say: "Task posted, unclaimed.",
+            say: tr("Task posted, unclaimed."),
             enter() {
               swapTo(chipSwap, 0);
               swapTo(noteSwap, 0);
               if (openNode) openNode.textContent = "12";
               paintRail(0);
-              setGo(lane() === "agent" ? "send an agent" : "claim it", false);
+              setGo(tr(lane() === "agent" ? "send an agent" : "claim it"), false);
             },
           },
           {
             say: () =>
-              lane() === "agent"
-                ? "An AI agent claimed the task."
-                : "You claimed the task.",
+              tr(
+                lane() === "agent"
+                  ? "An AI agent claimed the task."
+                  : "You claimed the task.",
+              ),
             enter() {
               swapTo(chipSwap, 1);
               swapTo(noteSwap, lane() === "agent" ? 2 : 1);
               paintRail(1);
-              setGo("hand in the work", false);
+              setGo(tr("hand in the work"), false);
             },
           },
           {
-            say: "Handed in. A human at Clean Water Trust is reviewing it.",
+            say: tr("Handed in. A human at Clean Water Trust is reviewing it."),
             next: { step: 3, delay: 1900 },
             enter() {
               swapTo(noteSwap, 3);
               paintRail(2);
-              setGo("a human is reviewing", true);
+              setGo(tr("a human is reviewing"), true);
             },
           },
           {
-            say: "Approved by a person, then shipped. Eleven tasks left open.",
+            say: tr("Approved by a person, then shipped. Eleven tasks left open."),
             enter() {
               swapTo(noteSwap, 4);
               if (openNode) openNode.textContent = "11";
               paintRail(3);
-              setGo("run it again", false);
+              setGo(tr("run it again"), false);
             },
           },
         ],
@@ -667,9 +747,11 @@
         // genuinely comparable
         demo.goTo(0, { silent: true });
         demo.say(
-          name === "agent"
-            ? "An AI agent will take it. The journey resets."
-            : "A human will take it. The journey resets.",
+          tr(
+            name === "agent"
+              ? "An AI agent will take it. The journey resets."
+              : "A human will take it. The journey resets.",
+          ),
         );
       };
 
@@ -720,42 +802,42 @@
       const CALLS = [
         {
           stamp: "lap 61 · 14:28:17z",
-          clip: "Team radio clip, 6.7 seconds",
+          clip: tr("Team radio clip, 6.7 seconds"),
           quote: "“yeah, tell him to catch up then, please.”",
-          state: "energised",
+          state: tr("energised"),
           z: "+1.69σ",
           conf: "0.67",
-          voice: "energised at 0.67 confidence",
-          car: "brake variance 42.6",
-          time: "blue flag · car 24",
-          agree: "3 of 3 channels agree.",
-          budget: "26 words · a full briefing fits",
+          voice: tr("energised at 0.67 confidence"),
+          car: tr("brake variance 42.6"),
+          time: tr("blue flag · car 24"),
+          agree: tr("3 of 3 channels agree."),
+          budget: tr("26 words · a full briefing fits"),
         },
         {
           stamp: "lap 70 · 14:43:14z",
-          clip: "Team radio clip, 11.2 seconds",
+          clip: tr("Team radio clip, 11.2 seconds"),
           quote: "“well done, good one, two, good load of points. congrats, t.”",
-          state: "fatigued",
+          state: tr("fatigued"),
           z: "−1.36σ",
           conf: "0.48",
-          voice: "fatigued at 0.48 confidence",
-          car: "brake variance 36.0",
-          time: "no race control for this call",
-          agree: "2 of 3 channels agree.",
-          budget: "26 words · this reading is too weak to hold a call back",
+          voice: tr("fatigued at 0.48 confidence"),
+          car: tr("brake variance 36.0"),
+          time: tr("no race control for this call"),
+          agree: tr("2 of 3 channels agree."),
+          budget: tr("26 words · this reading is too weak to hold a call back"),
         },
         {
           stamp: "lap 56 · 14:20:31z",
-          clip: "Team radio clip, 16.1 seconds",
+          clip: tr("Team radio clip, 16.1 seconds"),
           quote: "“doesn’t matter. i mean, it does. for me, maybe.”",
-          state: "uncertain",
+          state: tr("uncertain"),
           z: "−1.18σ",
           conf: "0.00",
-          voice: "refused · under 1.5s of voiced audio",
-          car: "brake variance 43.3",
-          time: "blue flag · car 20",
-          agree: "The state reading was refused, not produced.",
-          budget: "26 words · state refused, listen to the clip yourself",
+          voice: tr("refused · under 1.5s of voiced audio"),
+          car: tr("brake variance 43.3"),
+          time: tr("blue flag · car 20"),
+          agree: tr("The state reading was refused, not produced."),
+          budget: tr("26 words · state refused, listen to the clip yourself"),
         },
       ];
 
@@ -793,11 +875,11 @@
         write(out.state, "—");
         write(out.z, "—");
         write(out.conf, "—");
-        write(out.voice, "not read yet");
+        write(out.voice, tr("not read yet"));
         write(out.car, c.car);
         write(out.time, c.time);
-        write(out.verdict, "—");
-        write(out.budget, "waiting on the clip");
+        write(out.verdict, tr("—"));
+        write(out.budget, tr("waiting on the clip"));
         if (wave) wave.setAttribute("aria-label", c.clip);
       };
 
@@ -811,7 +893,7 @@
       const paintComms = () => {
         const c = call();
         write(out.voice, c.voice);
-        write(out.verdict, "safe to talk");
+        write(out.verdict, tr("safe to talk"));
         write(out.budget, c.budget);
       };
 
@@ -829,24 +911,29 @@
       demo = createDemo(radio, {
         steps: [
           {
-            say: () => `${call().stamp}. Clip loaded, not yet read.`,
-            hint: "three calls flagged — try another",
+            say: () =>
+              zh
+                ? `${call().stamp}。片段已载入，尚未判断。`
+                : `${call().stamp}. Clip loaded, not yet read.`,
+            hint: tr("three calls flagged — try another"),
             enter() {
               paintIdle();
-              setGo("play the call", false);
+              setGo(tr("play the call"), false);
             },
           },
           {
-            say: () => `Playing. ${call().quote}`,
+            say: () => `${zh ? "播放中。" : "Playing. "}${call().quote}`,
             hint: "",
             next: { step: 2, delay: clipMs },
             enter() {
-              setGo("reading the clip", true);
+              setGo(tr("reading the clip"), true);
             },
           },
           {
             say: () =>
-              `Read: ${call().state}, ${call().z} against his own baseline, confidence ${call().conf}.`,
+              zh
+                ? `判断：${call().state}，相对他自己的基线 ${call().z}，置信度 ${call().conf}。`
+                : `Read: ${call().state}, ${call().z} against his own baseline, confidence ${call().conf}.`,
             hint: "",
             next: { step: 3, delay: 950 },
             enter() {
@@ -855,11 +942,13 @@
           },
           {
             say: () =>
-              `${call().agree} Comms: safe to talk, ${call().budget.split(" · ")[0]}.`,
+              zh
+                ? `${call().agree}通话：可以说话，${call().budget.split(" · ")[0]}。`
+                : `${call().agree} Comms: safe to talk, ${call().budget.split(" · ")[0]}.`,
             hint: "",
             enter() {
               paintComms();
-              setGo("run it again", false);
+              setGo(tr("run it again"), false);
             },
           },
         ],
@@ -890,7 +979,11 @@
         if (focusIt) callBtns[i].focus();
         // a different clip is a different reading; nothing from the last one survives
         demo.goTo(0, { silent: true });
-        demo.say(`${call().stamp} loaded. Play it to read the clip.`);
+        demo.say(
+          zh
+            ? `${call().stamp} 已载入。播放即可判断。`
+            : `${call().stamp} loaded. Play it to read the clip.`,
+        );
       };
 
       callBtns.forEach((btn, i) => {
