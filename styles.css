@@ -2609,6 +2609,12 @@ a.hero__meta-value:hover,
   margin-bottom: 36px;
 }
 
+.contact__ask {
+  margin-top: -16px;
+  margin-bottom: 24px;
+  color: var(--red-deep);
+}
+
 .contact__links {
   display: grid;
   gap: 0;
