@@ -5,6 +5,11 @@
   "description": "Personal portfolio: soft like sakura, fast like ferrari.",
   "scripts": {
     "dev": "npx --yes serve@latest -l 4173 .",
-    "start": "npm run dev"
+    "start": "npm run dev",
+    "build": "node build.mjs",
+    "preview": "npm run build && npx --yes wrangler@4 pages dev dist --port 8788"
+  },
+  "dependencies": {
+    "marked": "^18.1.1"
   }
 }

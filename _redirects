@@ -1,0 +1,11 @@
+# Affiliate links: /go/<tool> -> partner URL (302, so you can change the target any time).
+# Link to /go/<tool> from posts. build.mjs adds rel="sponsored nofollow" to those links.
+# Format: /go/<tool>  <destination URL>  302
+# Swap each destination for your affiliate URL once you're approved for that program.
+
+/go/cloudflare  https://www.cloudflare.com/  302
+# /go/hostinger  https://www.hostinger.com/?REF=YOUR_CODE  302
+# /go/notion     https://affiliate.notion.so/YOUR_CODE     302
+
+# Unknown tool -> blog instead of a 404.
+/go/*  /blog  302

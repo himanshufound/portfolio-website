@@ -16,3 +16,7 @@ npm-debug.log*
 
 # claude code local config
 .claude/
+
+# build output
+dist/
+.wrangler/

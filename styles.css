@@ -3209,3 +3209,43 @@ a.hero__meta-value:hover,
 :lang(zh) em {
   font-style: normal;
 }
+
+/* ---------- newsletter (home + generated blog pages) ---------- */
+
+.newsletter {
+  padding: clamp(24px, 5vw, 44px);
+  border: 1px solid var(--ink-line);
+  border-radius: var(--radius);
+  background: oklch(0.99 0.005 80 / 0.72);
+}
+
+.newsletter__title {
+  font-family: "Fraunces", serif;
+  font-weight: 400;
+  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  max-width: 24ch;
+}
+
+.newsletter__copy,
+.newsletter__soon {
+  margin-top: 12px;
+  max-width: 56ch;
+  color: var(--ink-soft);
+}
+
+.newsletter__soon a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--pink-deep);
+  text-underline-offset: 3px;
+}
+
+/* 7 nav links (incl. blog / work with me) must wrap on phones, not scroll sideways */
+@media (max-width: 880px) {
+  .nav__links {
+    flex-wrap: wrap;
+    row-gap: 2px;
+  }
+}

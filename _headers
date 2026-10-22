@@ -1,0 +1,10 @@
+# Ported from vercel.json. Cloudflare matches paths only, not ?v= queries, so styles.css,
+# script.js and demos.js keep the default revalidating cache instead of a year-long one.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+/audio/*
+  Cache-Control: public, max-age=31536000, immutable
+/go/*
+  X-Robots-Tag: noindex

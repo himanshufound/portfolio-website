@@ -7,8 +7,9 @@ Soft like sakura, fast like Ferrari.
 
 ## Stack
 
-Vanilla HTML, CSS, and JavaScript — no framework, no build step.
-Hosted on Vercel.
+Vanilla HTML, CSS, and JavaScript — no framework. One small build step
+(`build.mjs`, uses `marked`) renders the blog and extra pages from `content/` into `dist/`.
+Moving from Vercel to Cloudflare Pages — see `DEPLOY.md`.
 
 ## Run locally
 
@@ -16,7 +17,8 @@ Hosted on Vercel.
 npm run dev
 ```
 
-Serves the site at http://localhost:4173 via `npx serve`.
+Serves the repo root at http://localhost:4173 via `npx serve` (home pages only).
+`npm run preview` builds `dist/` and serves it like Cloudflare Pages at http://localhost:8788.
 
 Once per clone, enable the hook that stamps asset hashes into `index.html`
 (CSS/JS are cached for a year, so their `?v=` must change with their content):
@@ -33,3 +35,9 @@ git config core.hooksPath .githooks
 - `script.js` — petals, smooth scroll, scroll reveals, music player
 - `images/` — hero art (PNG + optimized JPEG)
 - `audio/` — playlist tracks for the floating music player
+- `content/blog/*.md` — blog posts (front matter: title, description, date, tags)
+- `content/pages/*.md` — `/work-with-me`, `/products`, `/disclosure`
+- `build.mjs` — builds `dist/` (static copy + blog, pages, `rss.xml`, `sitemap.xml`)
+- `prose.css` — styles for the generated pages
+- `_redirects` — `/go/<tool>` affiliate redirects (Cloudflare Pages)
+- `_headers` — cache headers (Cloudflare Pages)
