@@ -2,6 +2,19 @@
 
 The site is plain HTML plus a small build step (`build.mjs`). The build turns Markdown in `content/` into `/blog`, the posts, `/work-with-me`, `/products` and `/disclosure`, and writes `rss.xml` and `sitemap.xml`. Everything goes into `dist/`.
 
+## Current setup (live since 2026-10-23)
+
+- **Pages project:** `himanshufr`, connected to GitHub. Every push to `main` deploys. Preview URL: `himanshufr.pages.dev`.
+- **Domain:** `himanshufr.me` is on Cloudflare nameservers (`carrera` and `konnor`.ns.cloudflare.com), set at Namecheap. DNS records:
+  - `@` and `www` CNAME `himanshufr.pages.dev`, proxied
+  - `aimpact` and `flow` CNAME to their Vercel addresses, DNS only (they stay on Vercel)
+  - `yuno` CNAME `yuno-888.pages.dev`, DNS only
+- **Redirect rule:** `www.himanshufr.me/*` redirects with a 301 to `himanshufr.me/*`. The canonical address is the bare domain.
+- **Web Analytics:** on for the zone, auto-installed. No code needed.
+- **Still to do:** after 2026-10-25, once every DNS cache has picked up Cloudflare, remove `himanshufr.me` and `www` from the *portfolio* project in Vercel and delete `vercel.json`. Leave the aimpact and flow projects alone.
+
+The steps below are how this was set up. Keep them for reference or for a rebuild.
+
 ## Local
 
 ```bash
