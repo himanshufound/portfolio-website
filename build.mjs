@@ -217,6 +217,24 @@ ${html}
   );
 }
 
+// A 404.html makes Cloudflare Pages (and Vercel) return a real 404 for unknown paths,
+// instead of serving the home page with a 200.
+write(
+  "404.html",
+  layout({
+    title: `Page not found — ${AUTHOR}`,
+    description: "This page doesn't exist.",
+    urlPath: "/404",
+    body: `      <article class="post">
+        <p class="section-tag">404</p>
+        <h1 class="page__title">This page doesn&rsquo;t exist.</h1>
+        <div class="prose">
+          <p>Try the <a href="/">home page</a>, the <a href="/blog">blog</a>, or <a href="/work-with-me">work with me</a>.</p>
+        </div>
+      </article>`,
+  }),
+);
+
 // 4. RSS + sitemap.
 const rss = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
