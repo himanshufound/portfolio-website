@@ -30,7 +30,6 @@ As fast or as chill as you want, minimum 2 days. You get a private preview link 
 
 ## Book a call
 
-<!-- BOOKING LINK PLACEHOLDER: swap the mailto below for your Cal.com / Calendly link. -->
-<p><a class="btn btn--primary" href="mailto:rawat.himanshu2211@gmail.com?subject=Website%20%2B%20automation">Book a 20-minute call</a></p>
+<p><a class="btn btn--primary" href="https://cal.com/himanshufr" target="_blank" rel="noopener">Book a 20-minute call</a></p>
 
 Prefer to write? Email [rawat.himanshu2211@gmail.com](mailto:rawat.himanshu2211@gmail.com) or add me on WeChat: **himanshufr**. Tell me about your business, your current site (if any), and what you'd like built or automated.
