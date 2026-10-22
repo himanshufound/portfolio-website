@@ -176,3 +176,21 @@
 .site-foot a {
   text-decoration: none !important;
 }
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.prose th,
+.prose td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--ink-line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.prose img {
+  border-radius: var(--radius-sm);
+}
