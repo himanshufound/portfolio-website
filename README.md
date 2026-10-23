@@ -32,11 +32,14 @@ git config core.hooksPath .githooks
 - `index.html` — single-page site (hero, about, work, contact)
 - `zh.html` — simplified Chinese copy of `index.html`, served at `/zh`; JS strings switch on `<html lang="zh-CN">`
 - `styles.css` — all styling (design tokens, layout, animations)
-- `script.js` — petals, smooth scroll, scroll reveals, music player
+- `script.js` — petals, smooth scroll, scroll reveals, music player (home pages)
+- `motion.js` — every page: F1 shift-light scroll progress, nav that shrinks/hides with a follow pill, heading reveals, cursor follower, magnetic buttons
+- `work-with-me.css`, `work-with-me.js` — loaded only by `/work-with-me`
 - `images/` — hero art (PNG + optimized JPEG)
 - `audio/` — playlist tracks for the floating music player
 - `content/blog/*.md` — blog posts (front matter: title, description, date, tags)
-- `content/pages/*.md` — `/work-with-me`, `/products`, `/disclosure`
+- `content/pages/*.md` — `/products`, `/disclosure` (Markdown, rendered as prose)
+- `content/pages/work-with-me.html` — `/work-with-me`, hand-built markup inside the shared layout
 - `build.mjs` — builds `dist/` (static copy + blog, pages, `rss.xml`, `sitemap.xml`)
 - `prose.css` — styles for the generated pages
 - `_redirects` — `/go/<tool>` affiliate redirects (Cloudflare Pages)

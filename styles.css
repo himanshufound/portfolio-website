@@ -502,12 +502,20 @@ a.hero__meta-value:hover,
   min-height: 0;
 }
 
+/* polaroids: white frame, handwritten caption, the stack fans out on hover */
 .hero__photo {
   position: relative;
-  border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: var(--shadow-lg);
-  border: 1px solid oklch(0.99 0.005 80 / 0.4);
+  padding: 12px 12px 46px;
+  border-radius: 6px;
+  background: var(--paper);
+  box-shadow: 0 1px 2px oklch(0.16 0.05 22 / 0.08), 0 18px 40px oklch(0.16 0.05 22 / 0.14),
+    0 50px 90px -30px oklch(0.16 0.05 22 / 0.3);
+  transition: transform 700ms var(--ease-out-expo), box-shadow 500ms ease;
+}
+
+.hero__photo:hover {
+  z-index: 5;
+  box-shadow: 0 50px 90px -20px oklch(0.16 0.05 22 / 0.4);
 }
 
 /* the <picture> wrapper must not become a box, or img height: 100% collapses */
@@ -519,6 +527,7 @@ a.hero__meta-value:hover,
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 3px;
   transition: transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
@@ -528,16 +537,15 @@ a.hero__meta-value:hover,
 
 .hero__photo figcaption {
   position: absolute;
-  left: 14px;
-  bottom: 12px;
-  right: 14px;
+  left: 16px;
+  bottom: 8px;
+  right: 16px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  font-size: 0.78rem;
-  color: oklch(0.98 0.01 75);
-  text-shadow: 0 1px 8px oklch(0.16 0.02 25 / 0.5);
-  letter-spacing: 0.04em;
+  align-items: baseline;
+  font-family: "Caveat", cursive;
+  font-size: 1.3rem;
+  color: var(--ink-soft);
 }
 
 /* the back card of the stack: tilted the other way and pushed out to the right
@@ -550,13 +558,9 @@ a.hero__meta-value:hover,
 }
 
 .hero__photo--tower figcaption {
-  /* the visible strip is the lower-left corner, so the caption stacks into it */
+  /* only the lower-left of this card shows, so keep its caption there */
   right: auto;
-  left: 14px;
-  bottom: 14px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2px;
+  gap: 8px;
 }
 
 .hero__photo--blossom {
@@ -571,6 +575,18 @@ a.hero__meta-value:hover,
   grid-row: 4 / span 5;
   z-index: 3;
   transform: rotate(3deg);
+}
+
+.hero__art:hover .hero__photo--tower {
+  transform: rotate(-14deg) translate(-16%, 9%);
+}
+
+.hero__art:hover .hero__photo--blossom {
+  transform: rotate(-6deg) translate(-5%, -5%);
+}
+
+.hero__art:hover .hero__photo--ferrari {
+  transform: rotate(9deg) translate(8%, 5%);
 }
 
 .hero__sticker {
@@ -960,7 +976,12 @@ a.hero__meta-value:hover,
     radial-gradient(circle at 30% 20%, oklch(0.96 0.06 14 / 0.7), transparent 60%),
     linear-gradient(160deg, oklch(0.94 0.04 16), oklch(0.9 0.05 22));
   min-height: 380px;
-  overflow: hidden;
+  overflow: hidden;  transition: translate 600ms var(--ease-out-expo), box-shadow 500ms ease;
+}
+
+.case:hover .case__visual {
+  translate: 0 -6px;
+  box-shadow: var(--shadow-lg);
 }
 
 .case__visual--dark {
@@ -3263,5 +3284,279 @@ a.hero__meta-value:hover,
   .nav__links {
     flex-wrap: wrap;
     row-gap: 2px;
+  }
+}
+
+/* ---------- motion layer (motion.js), on every page ---------- */
+
+/* F1 shift lights: scroll progress, 5 green, 5 red, 5 blue */
+.shift {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  z-index: 70;
+  translate: -50% 0;
+  display: flex;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 0 0 14px 14px;
+  background: oklch(0.14 0.01 25 / 0.92);
+  box-shadow: 0 8px 20px oklch(0.16 0.05 22 / 0.2);
+  pointer-events: none;
+}
+
+.shift i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: oklch(1 0 0 / 0.1);
+  transition: background 120ms ease, box-shadow 120ms ease;
+}
+
+.shift i.on:nth-child(-n + 5) {
+  background: oklch(0.78 0.2 145);
+  box-shadow: 0 0 10px oklch(0.78 0.2 145);
+}
+
+.shift i.on:nth-child(n + 6):nth-child(-n + 10) {
+  background: var(--red);
+  box-shadow: 0 0 10px var(--red);
+}
+
+.shift i.on:nth-child(n + 11) {
+  background: oklch(0.7 0.16 255);
+  box-shadow: 0 0 10px oklch(0.7 0.16 255);
+}
+
+/* nav: sticky under the lights, shrinks once scrolled, hides while scrolling down */
+.nav {
+  position: sticky;
+  top: 26px;
+  z-index: 60;
+  margin-top: 30px;
+  transition: transform 420ms var(--ease-out-expo), width 520ms var(--ease-out-expo),
+    box-shadow 320ms ease;
+}
+
+.nav.is-scrolled {
+  width: var(--nav-shrink, min(1080px, 100% - 40px));
+  box-shadow: 0 10px 30px oklch(0.16 0.05 22 / 0.1), 0 1px 0 oklch(1 0 0 / 0.6) inset;
+}
+
+.nav.is-hidden {
+  transform: translateY(calc(-100% - 40px));
+}
+
+.nav__links,
+.nav__status {
+  white-space: nowrap;
+}
+
+/* the "menu follow" pill slides under the hovered link and rests on the current page */
+.nav__links {
+  position: relative;
+  align-items: center;
+}
+
+.nav__links a {
+  z-index: 1;
+  padding: 6px 12px;
+  border-radius: 999px;
+}
+
+.nav__links a::after {
+  display: none;
+}
+
+.nav__links a.is-pill {
+  color: oklch(0.98 0.01 75);
+}
+
+.nav__pill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--w, 0);
+  height: var(--h, 0);
+  translate: var(--x, 0) var(--y, 0);
+  border-radius: 999px;
+  background: var(--ink);
+  opacity: var(--o, 0);
+  transition: translate 420ms var(--ease-out-expo), width 420ms var(--ease-out-expo),
+    opacity 200ms ease;
+}
+
+/* cursor follower */
+.cursor {
+  display: none;
+  pointer-events: none;
+}
+
+.has-cursor .cursor {
+  display: block;
+}
+
+.cursor__dot,
+.cursor__ring {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 90;
+  border-radius: 50%;
+  translate: -50% -50%;
+  pointer-events: none;
+}
+
+.cursor__dot {
+  width: 6px;
+  height: 6px;
+  background: var(--red);
+}
+
+.cursor__ring {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid oklch(0.55 0.22 27 / 0.5);
+  color: oklch(0.98 0.01 75);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: width 360ms var(--ease-out-expo), height 360ms var(--ease-out-expo),
+    background 260ms ease, border-color 260ms ease, opacity 200ms ease;
+}
+
+.cursor__ring span {
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.cursor.is-hover .cursor__ring {
+  width: 56px;
+  height: 56px;
+  background: oklch(0.55 0.22 27 / 0.12);
+  border-color: transparent;
+}
+
+.cursor.is-label .cursor__ring {
+  width: 84px;
+  height: 84px;
+  background: var(--red);
+}
+
+.cursor.is-label .cursor__ring span {
+  opacity: 1;
+}
+
+.cursor.is-hover .cursor__dot,
+.cursor.is-label .cursor__dot,
+.cursor.is-gone .cursor__dot,
+.cursor.is-gone .cursor__ring {
+  opacity: 0;
+}
+
+/* reveals */
+[data-reveal] {
+  opacity: 0;
+  translate: 0 28px;
+  transition: opacity 900ms var(--ease-out-quint), translate 900ms var(--ease-out-quint);
+  transition-delay: var(--d, 0ms);
+}
+
+[data-reveal].is-in {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* split headings: each word rises out of its own mask; the padding leaves room for italic
+   overhang and descenders and is cancelled by the margin so line boxes don't grow */
+.split-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding: 0.12em 0.14em 0.16em;
+  margin: -0.12em -0.14em -0.16em;
+}
+
+.split-word > span {
+  display: inline-block;
+  translate: 0 105%;
+  transition: translate 1000ms var(--ease-out-expo);
+  transition-delay: calc(var(--i) * 55ms + var(--d, 0ms));
+}
+
+.is-in .split-word > span {
+  translate: 0 0;
+}
+
+/* magnetic buttons ease back when the pointer leaves, follow tightly while it's over them */
+.btn,
+[data-magnetic] {
+  transition: transform 500ms var(--ease-out-expo), background 220ms ease,
+    border-color 220ms ease, color 220ms ease;
+}
+
+.is-pulling {
+  transition: transform 120ms linear, background 220ms ease, border-color 220ms ease,
+    color 220ms ease;
+}
+
+/* copy-to-clipboard confirmation */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  z-index: 80;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: oklch(0.98 0.01 75);
+  font-size: 0.9rem;
+  translate: -50% 200%;
+  opacity: 0;
+  transition: translate 420ms var(--ease-out-expo), opacity 200ms ease;
+}
+
+.toast.is-on {
+  translate: -50% 0;
+  opacity: 1;
+}
+
+@media (max-width: 880px) {
+  .nav.is-scrolled {
+    width: min(100% - 40px, 1240px);
+  }
+}
+
+@media (max-width: 560px) {
+  .nav.is-scrolled {
+    width: min(100% - 28px, 1240px);
+  }
+
+  .nav__links {
+    gap: 2px 4px;
+  }
+
+  .nav__links a {
+    padding: 5px 9px;
+  }
+
+  .shift {
+    gap: 4px;
+    padding: 5px 10px;
+  }
+
+  .shift i {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  .split-word > span {
+    opacity: 1;
+    translate: none;
   }
 }

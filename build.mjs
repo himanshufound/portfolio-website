@@ -13,7 +13,8 @@ const OUT = "dist";
 // The only repo-root entries that get published. An allowlist, so private or scratch files
 // dropped in the folder (invoices, notes, CSVs) never reach dist/. Add new public files here.
 const PUBLIC = [
-  "index.html", "zh.html", "styles.css", "script.js", "demos.js", "prose.css",
+  "index.html", "zh.html", "styles.css", "script.js", "demos.js", "motion.js", "prose.css",
+  "work-with-me.css", "work-with-me.js",
   "favicon.svg", "apple-touch-icon.png", "resume.pdf", "robots.txt", "_redirects", "_headers",
   "fonts", "images", "audio",
 ];
@@ -40,7 +41,8 @@ function parse(file) {
   for (const k of ["title", "description"]) if (!meta[k]) throw new Error(`${file}: front matter needs "${k}"`);
   meta.tags = (meta.tags || "").replace(/^\[|\]$/g, "").split(",").map((t) => t.trim()).filter(Boolean);
   meta.draft = meta.draft === "true";
-  return { meta, html: sponsor(marked.parse(m[2])) };
+  // .html pages are hand-built markup: used as-is, not run through Markdown
+  return { meta, html: sponsor(file.endsWith(".html") ? m[2] : marked.parse(m[2])) };
 }
 
 const NEWSLETTER = `
@@ -60,9 +62,17 @@ const v = {
   fonts: hash("fonts/fonts.css"),
   styles: hash("styles.css"),
   prose: hash("prose.css"),
+  motion: hash("motion.js"),
 };
 
-function layout({ title, description, urlPath, body, type = "website" }) {
+const NAV = [
+  ["/#work", "work"],
+  ["/blog", "blog"],
+  ["/work-with-me", "work with me"],
+];
+
+// `assets` names a root-level <name>.css / <name>.js pair that only this page loads.
+function layout({ title, description, urlPath, body, type = "website", assets, mainClass = "page" }) {
   const url = SITE + urlPath;
   return `<!doctype html>
 <html lang="en">
@@ -85,7 +95,12 @@ function layout({ title, description, urlPath, body, type = "website" }) {
     <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="/fonts/fonts.css?v=${v.fonts}" />
     <link rel="stylesheet" href="/styles.css?v=${v.styles}" />
-    <link rel="stylesheet" href="/prose.css?v=${v.prose}" />
+    <link rel="stylesheet" href="/prose.css?v=${v.prose}" />${
+      assets ? `\n    <link rel="stylesheet" href="/${assets}.css?v=${hash(`${assets}.css`)}" />` : ""
+    }
+    <script src="/motion.js?v=${v.motion}" defer></script>${
+      assets ? `\n    <script src="/${assets}.js?v=${hash(`${assets}.js`)}" defer></script>` : ""
+    }
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   </head>
@@ -97,12 +112,10 @@ function layout({ title, description, urlPath, body, type = "website" }) {
         <span class="nav__mark-name">himanshu</span>
       </a>
       <nav class="nav__links" aria-label="Primary">
-        <a href="/#work">work</a>
-        <a href="/blog">blog</a>
-        <a href="/work-with-me">work with me</a>
+${NAV.map(([href, label]) => `        <a href="${href}"${href === urlPath ? ' aria-current="page"' : ""}>${label}</a>`).join("\n")}
       </nav>
     </header>
-    <main class="page">
+    <main class="${mainClass}">
 ${body}
       <footer class="site-foot">
         <a href="/blog">blog</a>
@@ -199,10 +212,24 @@ ${NEWSLETTER}`,
 );
 
 // 3. Standalone pages -> dist/<slug>.html, served at /<slug>.
-const pages = fs.readdirSync("content/pages").filter((f) => f.endsWith(".md"));
+const pages = fs.readdirSync("content/pages").filter((f) => /\.(md|html)$/.test(f));
 for (const f of pages) {
-  const slug = f.replace(/\.md$/, "");
+  const slug = f.replace(/\.(md|html)$/, "");
   const { meta, html } = parse(`content/pages/${f}`);
+  if (f.endsWith(".html")) {
+    write(
+      `${slug}.html`,
+      layout({
+        title: `${meta.title} — ${AUTHOR}`,
+        description: meta.description,
+        urlPath: `/${slug}`,
+        body: html,
+        assets: slug,
+        mainClass: slug,
+      }),
+    );
+    continue;
+  }
   write(
     `${slug}.html`,
     layout({
@@ -268,7 +295,7 @@ const urls = [
   ["/", "1.0"],
   ["/zh", "0.8"],
   ["/blog", "0.8"],
-  ...pages.map((f) => [`/${f.replace(/\.md$/, "")}`, "0.6"]),
+  ...pages.map((f) => [`/${f.replace(/\.(md|html)$/, "")}`, "0.6"]),
   ...posts.map((p) => [`/blog/${p.slug}`, "0.7", p.date.toISOString().slice(0, 10)]),
 ];
 write(

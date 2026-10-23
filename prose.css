@@ -132,7 +132,7 @@
   gap: 8px;
 }
 
-.post-list li {
+.post-list > li {
   padding: 22px 0;
   border-top: 1px solid var(--ink-line);
 }
@@ -193,4 +193,9 @@
 
 .prose img {
   border-radius: var(--radius-sm);
+}
+
+/* generated pages have three nav links, so the scrolled nav can shrink further than home's */
+.nav {
+  --nav-shrink: min(820px, 100% - 40px);
 }
