@@ -40,7 +40,7 @@
     <link rel="stylesheet" href="fonts/fonts.css?v=0b769508" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-    <link rel="stylesheet" href="styles.css?v=eee96b5a" />
+    <link rel="stylesheet" href="styles.css?v=cac23722" />
     <script src="script.js?v=1bcb13b7" defer></script>
     <script src="demos.js?v=58723d06" defer></script>
     <script type="application/ld+json">
@@ -1100,13 +1100,16 @@
         </article>
       </section>
 
-      <!-- NEWSLETTER PLACEHOLDER: replace the <p class="newsletter__soon"> line with your provider's
-           embed form (Buttondown / Kit / beehiiv). Keep id="newsletter". -->
+      <!-- NEWSLETTER (Kit form 10085622). Copy lives here, in zh.html and in build.mjs NEWSLETTER. -->
       <section class="newsletter" id="newsletter" aria-labelledby="newsletter-heading">
         <p class="section-tag">订阅更新</p>
-        <h2 id="newsletter-heading" class="newsletter__title">每当我发布新作品或学到新东西，就发一封有用的邮件。</h2>
-        <p class="newsletter__copy">关于快速网站、小型 AI 自动化，以及背后用到的工具。不发垃圾邮件，随时可以退订。</p>
-        <p class="newsletter__soon">订阅即将开放。在此之前，<a href="mailto:rawat.himanshu2211@gmail.com?subject=Add%20me%20to%20the%20newsletter">给我发邮件</a>，我会把你加进名单。</p>
+        <h2 id="newsletter-heading" class="newsletter__title">用 AI 编程工具做的真实项目。</h2>
+        <p class="newsletter__copy">每周一封邮件。不发垃圾邮件，随时可以退订。</p>
+        <form class="newsletter__form" action="https://app.kit.com/forms/10085622/subscriptions" method="post">
+          <label for="newsletter-email" class="visually-hidden">邮箱地址</label>
+          <input id="newsletter-email" class="newsletter__input" type="email" name="email_address" required placeholder="you@example.com" autocomplete="email" />
+          <button class="btn btn--primary" type="submit">订阅</button>
+        </form>
       </section>
 
       <section class="contact" id="contact" aria-labelledby="contact-heading">

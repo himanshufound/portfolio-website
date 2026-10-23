@@ -16,7 +16,7 @@ I only link to tools I have used or would use on my own projects. A commission n
 ## What this site collects
 
 - **Analytics.** I use privacy-friendly, cookieless analytics to count page views and see which pages are popular. They don't build a profile of you and don't track you across other sites.
-- **Newsletter.** If you subscribe, your email address is stored with my newsletter provider and used only to send the newsletter. Every email has a link to unsubscribe.
+- **Newsletter.** If you subscribe, your email address is stored with my newsletter provider, Kit ([kit.com](https://kit.com)), and used only to send the newsletter. Every email has a link to unsubscribe.
 - **Email.** If you email me, I keep the conversation in order to reply. I don't sell or share it.
 
 This site sets no advertising cookies and runs no third-party ad trackers.

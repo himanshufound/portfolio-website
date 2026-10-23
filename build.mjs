@@ -44,13 +44,16 @@ function parse(file) {
 }
 
 const NEWSLETTER = `
-      <!-- NEWSLETTER PLACEHOLDER: replace the <p class="newsletter__soon"> line with your provider's
-           embed form (Buttondown / Kit / beehiiv). Same block lives in index.html and zh.html. -->
+      <!-- NEWSLETTER (Kit form 10085622). Copy lives here, in zh.html and in build.mjs NEWSLETTER. -->
       <section class="newsletter" id="newsletter" aria-labelledby="newsletter-heading">
         <p class="section-tag">newsletter</p>
-        <h2 id="newsletter-heading" class="newsletter__title">One useful email when I ship or learn something.</h2>
-        <p class="newsletter__copy">Fast websites, small AI automations, and the tools behind them. No spam, unsubscribe any time.</p>
-        <p class="newsletter__soon">Sign-up opens soon. Until then, <a href="mailto:rawat.himanshu2211@gmail.com?subject=Add%20me%20to%20the%20newsletter">email me</a> and I&rsquo;ll add you.</p>
+        <h2 id="newsletter-heading" class="newsletter__title">Real projects built with AI coding tools.</h2>
+        <p class="newsletter__copy">One email a week. No spam, unsubscribe any time.</p>
+        <form class="newsletter__form" action="https://app.kit.com/forms/10085622/subscriptions" method="post">
+          <label for="newsletter-email" class="visually-hidden">Email address</label>
+          <input id="newsletter-email" class="newsletter__input" type="email" name="email_address" required placeholder="you@example.com" autocomplete="email" />
+          <button class="btn btn--primary" type="submit">Subscribe</button>
+        </form>
       </section>`;
 
 const v = {
