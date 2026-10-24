@@ -6,12 +6,12 @@
     <meta name="theme-color" content="#1a1418" />
     <meta
       name="description"
-      content="Himanshu Rawat — BBA student at CUHK-Shenzhen building pillybot (a dementia medication companion, 200+ families in early access), aimpact (nonprofit tasks for AI volunteers), slipstream (F1 team-radio triage, Trackshift Paytm hackathon winner), and focusflow. Product, design, and AI with TypeScript, React, and Python."
+      content="AI product builder at CUHK-Shenzhen. I ship pillybot (200+ families in early access), aimpact, slipstream (Paytm hackathon winner) and focusflow."
     />
-    <meta property="og:title" content="Himanshu Rawat — Portfolio" />
+    <meta property="og:title" content="Himanshu Rawat — AI Product Builder &amp; Web Developer" />
     <meta
       property="og:description"
-      content="Himanshu Rawat — BBA student at CUHK-Shenzhen building pillybot (a dementia medication companion, 200+ families in early access), aimpact (nonprofit tasks for AI volunteers), slipstream (F1 team-radio triage, Trackshift Paytm hackathon winner), and focusflow."
+      content="AI product builder at CUHK-Shenzhen. I ship pillybot (200+ families in early access), aimpact, slipstream (Paytm hackathon winner) and focusflow."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://himanshufr.me/" />
@@ -21,17 +21,17 @@
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Himanshu Rawat — soft like sakura, fast like ferrari" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Himanshu Rawat — Portfolio" />
+    <meta name="twitter:title" content="Himanshu Rawat — AI Product Builder &amp; Web Developer" />
     <meta
       name="twitter:description"
-      content="Himanshu Rawat — BBA student at CUHK-Shenzhen building pillybot (a dementia medication companion, 200+ families in early access), aimpact (nonprofit tasks for AI volunteers), slipstream (F1 team-radio triage, Trackshift Paytm hackathon winner), and focusflow."
+      content="AI product builder at CUHK-Shenzhen. I ship pillybot (200+ families in early access), aimpact, slipstream (Paytm hackathon winner) and focusflow."
     />
     <meta name="twitter:image" content="https://himanshufr.me/images/og.jpg" />
     <link rel="canonical" href="https://himanshufr.me/" />
     <link rel="alternate" hreflang="en" href="https://himanshufr.me/" />
     <link rel="alternate" hreflang="zh-CN" href="https://himanshufr.me/zh" />
     <link rel="alternate" hreflang="x-default" href="https://himanshufr.me/" />
-    <title>Himanshu Rawat — Portfolio</title>
+    <title>Himanshu Rawat — AI Product Builder &amp; Web Developer</title>
 
     <link rel="preload" href="fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
@@ -46,19 +46,46 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Himanshu Rawat",
-        "url": "https://himanshufr.me/",
-        "jobTitle": "AI product builder",
-        "alumniOf": {
-          "@type": "CollegeOrUniversity",
-          "name": "The Chinese University of Hong Kong, Shenzhen"
-        },
-        "award": "Winner, Trackshift Paytm Hackathon",
-        "knowsAbout": ["product management", "AI products", "TypeScript", "React", "Python"],
-        "sameAs": [
-          "https://www.linkedin.com/in/himanshufrfr/",
-          "https://github.com/himanshufound"
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://himanshufr.me/#website",
+            "url": "https://himanshufr.me/",
+            "name": "Himanshu Rawat",
+            "inLanguage": ["en", "zh-CN"],
+            "publisher": { "@id": "https://himanshufr.me/#person" }
+          },
+          {
+            "@type": "Person",
+            "@id": "https://himanshufr.me/#person",
+            "name": "Himanshu Rawat",
+            "url": "https://himanshufr.me/",
+            "jobTitle": "AI product builder",
+            "alumniOf": {
+              "@type": "CollegeOrUniversity",
+              "name": "The Chinese University of Hong Kong, Shenzhen"
+            },
+            "award": "Winner, Trackshift Paytm Hackathon",
+            "knowsAbout": ["product management", "AI products", "TypeScript", "React", "Python"],
+            "sameAs": [
+              "https://www.linkedin.com/in/himanshufrfr/",
+              "https://github.com/himanshufound"
+            ]
+          },
+          {
+            "@type": "Organization",
+            "@id": "https://yuno.himanshufr.me/#organization",
+            "name": "Yuno",
+            "url": "https://yuno.himanshufr.me/",
+            "founder": { "@id": "https://himanshufr.me/#person" }
+          },
+          {
+            "@type": "Organization",
+            "@id": "https://aimpact.himanshufr.me/#organization",
+            "name": "AImpact",
+            "url": "https://aimpact.himanshufr.me/",
+            "founder": { "@id": "https://himanshufr.me/#person" }
+          }
         ]
       }
     </script>

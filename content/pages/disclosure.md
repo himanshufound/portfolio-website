@@ -3,6 +3,7 @@ title: Disclosure & privacy
 heading: Disclosure & privacy
 description: How affiliate links and data work on himanshufr.me.
 tag: disclosure · privacy
+noindex: true
 ---
 
 _Last updated: 22 October 2026_

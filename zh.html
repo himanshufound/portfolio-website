@@ -6,12 +6,12 @@
     <meta name="theme-color" content="#1a1418" />
     <meta
       name="description"
-      content="Himanshu Rawat — 港中大（深圳）工商管理本科生，在做 pillybot（失智症用药助手，200+ 家庭抢先体验）、aimpact（让 AI 志愿者帮公益组织做事）、slipstream（F1 车队无线电分析，Trackshift Paytm 黑客松冠军）和 focusflow。"
+      content="港中大（深圳）学生，AI 产品开发者。做过 pillybot（200+ 家庭抢先体验）、aimpact、slipstream（Trackshift Paytm 黑客松冠军）和 focusflow。"
     />
-    <meta property="og:title" content="Himanshu Rawat — 作品集" />
+    <meta property="og:title" content="Himanshu Rawat — AI 产品开发者 · 作品集" />
     <meta
       property="og:description"
-      content="Himanshu Rawat — 港中大（深圳）工商管理本科生，在做 pillybot（失智症用药助手，200+ 家庭抢先体验）、aimpact（让 AI 志愿者帮公益组织做事）、slipstream（F1 车队无线电分析，Trackshift Paytm 黑客松冠军）和 focusflow。"
+      content="港中大（深圳）学生，AI 产品开发者。做过 pillybot（200+ 家庭抢先体验）、aimpact、slipstream（Trackshift Paytm 黑客松冠军）和 focusflow。"
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://himanshufr.me/zh" />
@@ -22,17 +22,17 @@
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Himanshu Rawat — 柔如樱花，快如法拉利" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Himanshu Rawat — 作品集" />
+    <meta name="twitter:title" content="Himanshu Rawat — AI 产品开发者 · 作品集" />
     <meta
       name="twitter:description"
-      content="Himanshu Rawat — 港中大（深圳）工商管理本科生，在做 pillybot（失智症用药助手，200+ 家庭抢先体验）、aimpact（让 AI 志愿者帮公益组织做事）、slipstream（F1 车队无线电分析，Trackshift Paytm 黑客松冠军）和 focusflow。"
+      content="港中大（深圳）学生，AI 产品开发者。做过 pillybot（200+ 家庭抢先体验）、aimpact、slipstream（Trackshift Paytm 黑客松冠军）和 focusflow。"
     />
     <meta name="twitter:image" content="https://himanshufr.me/images/og.jpg" />
     <link rel="canonical" href="https://himanshufr.me/zh" />
     <link rel="alternate" hreflang="en" href="https://himanshufr.me/" />
     <link rel="alternate" hreflang="zh-CN" href="https://himanshufr.me/zh" />
     <link rel="alternate" hreflang="x-default" href="https://himanshufr.me/" />
-    <title>Himanshu Rawat — 作品集</title>
+    <title>Himanshu Rawat — AI 产品开发者 · 作品集</title>
 
     <link rel="preload" href="fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
@@ -47,19 +47,46 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Himanshu Rawat",
-        "url": "https://himanshufr.me/",
-        "jobTitle": "AI product builder",
-        "alumniOf": {
-          "@type": "CollegeOrUniversity",
-          "name": "The Chinese University of Hong Kong, Shenzhen"
-        },
-        "award": "Winner, Trackshift Paytm Hackathon",
-        "knowsAbout": ["product management", "AI products", "TypeScript", "React", "Python"],
-        "sameAs": [
-          "https://www.linkedin.com/in/himanshufrfr/",
-          "https://github.com/himanshufound"
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://himanshufr.me/#website",
+            "url": "https://himanshufr.me/",
+            "name": "Himanshu Rawat",
+            "inLanguage": ["en", "zh-CN"],
+            "publisher": { "@id": "https://himanshufr.me/#person" }
+          },
+          {
+            "@type": "Person",
+            "@id": "https://himanshufr.me/#person",
+            "name": "Himanshu Rawat",
+            "url": "https://himanshufr.me/",
+            "jobTitle": "AI product builder",
+            "alumniOf": {
+              "@type": "CollegeOrUniversity",
+              "name": "The Chinese University of Hong Kong, Shenzhen"
+            },
+            "award": "Winner, Trackshift Paytm Hackathon",
+            "knowsAbout": ["product management", "AI products", "TypeScript", "React", "Python"],
+            "sameAs": [
+              "https://www.linkedin.com/in/himanshufrfr/",
+              "https://github.com/himanshufound"
+            ]
+          },
+          {
+            "@type": "Organization",
+            "@id": "https://yuno.himanshufr.me/#organization",
+            "name": "Yuno",
+            "url": "https://yuno.himanshufr.me/",
+            "founder": { "@id": "https://himanshufr.me/#person" }
+          },
+          {
+            "@type": "Organization",
+            "@id": "https://aimpact.himanshufr.me/#organization",
+            "name": "AImpact",
+            "url": "https://aimpact.himanshufr.me/",
+            "founder": { "@id": "https://himanshufr.me/#person" }
+          }
         ]
       }
     </script>

@@ -3,6 +3,7 @@ title: Products
 heading: Templates and tools, coming soon.
 description: Website templates and small automation kits from Himanshu Rawat. Coming soon.
 tag: products
+noindex: true
 newsletter: true
 ---
 

@@ -1,0 +1,24 @@
+# Himanshu Rawat
+
+> AI product builder and BBA student at The Chinese University of Hong Kong, Shenzhen. Builds and ships small AI products with TypeScript, React and Python. Winner of the Trackshift Paytm Hackathon.
+
+## Projects
+
+- [pillybot](https://www.pillybot.app): dementia medication companion, 200+ families in early access
+- [aimpact](https://aimpact.himanshufr.me/): a board of small nonprofit tasks that people or their AI agents can volunteer for, with human review
+- [slipstream](https://goodmaxgram.vercel.app/): F1 team-radio triage for the pit wall, Trackshift Paytm Hackathon winner
+- [focusflow](https://flow.himanshufr.me/): ADHD-friendly productivity workbench
+- [Yuno](https://yuno.himanshufr.me/): web studio building English and Chinese websites for exporters
+
+## Pages
+
+- [Home](https://himanshufr.me/): about, projects, contact
+- [中文](https://himanshufr.me/zh): Chinese version of the home page
+- [Blog](https://himanshufr.me/blog): build notes on websites and AI automations
+- [Work with me](https://himanshufr.me/work-with-me): a fast custom website plus one AI automation for small businesses
+- [Resume](https://himanshufr.me/resume.pdf)
+
+## Elsewhere
+
+- [GitHub](https://github.com/himanshufound)
+- [LinkedIn](https://www.linkedin.com/in/himanshufrfr/)

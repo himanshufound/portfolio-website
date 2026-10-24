@@ -4,6 +4,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { createHash } from "node:crypto";
+import { execFileSync } from "node:child_process";
 import { marked } from "marked";
 
 const SITE = "https://himanshufr.me";
@@ -15,7 +16,7 @@ const OUT = "dist";
 const PUBLIC = [
   "index.html", "zh.html", "styles.css", "script.js", "demos.js", "motion.js", "prose.css",
   "work-with-me.css", "work-with-me.js",
-  "favicon.svg", "apple-touch-icon.png", "resume.pdf", "robots.txt", "_redirects", "_headers",
+  "favicon.svg", "apple-touch-icon.png", "resume.pdf", "robots.txt", "llms.txt", "_redirects", "_headers",
   "fonts", "images", "audio",
 ];
 
@@ -24,6 +25,31 @@ const esc = (s) =>
 const hash = (f) => createHash("sha1").update(fs.readFileSync(f)).digest("hex").slice(0, 8);
 const fmtDate = (d) =>
   d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+// Last commit date (YYYY-MM-DD) of a source file, for sitemap <lastmod> and dateModified.
+// Undefined for uncommitted files, so the sitemap never claims a date it can't back up.
+// ponytail: a shallow clone reports its tip date for every file; build from a full clone.
+const gitDate = (file) => {
+  try {
+    return execFileSync("git", ["log", "-1", "--format=%cs", "--", file], { encoding: "utf8" }).trim() || undefined;
+  } catch {
+    return undefined;
+  }
+};
+const latest = (...dates) => dates.filter(Boolean).sort().at(-1);
+// JSON-LD inside <script>: escape "<" so a "</script>" in a title can't close the tag.
+const ldJson = (data) => JSON.stringify(data, null, 2).replaceAll("<", "\\u003c");
+// The Person node lives on the home page; other pages point at it by @id.
+const PERSON = { "@type": "Person", "@id": `${SITE}/#person`, name: AUTHOR, url: `${SITE}/` };
+const breadcrumbs = (trail) => ({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: trail.map(([name, urlPath], i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name,
+    item: SITE + urlPath,
+  })),
+});
 // Affiliate links go through /go/<tool> (see _redirects) and must be marked as paid links.
 const sponsor = (html) => html.replaceAll('<a href="/go/', '<a rel="sponsored nofollow" href="/go/');
 
@@ -41,6 +67,7 @@ function parse(file) {
   for (const k of ["title", "description"]) if (!meta[k]) throw new Error(`${file}: front matter needs "${k}"`);
   meta.tags = (meta.tags || "").replace(/^\[|\]$/g, "").split(",").map((t) => t.trim()).filter(Boolean);
   meta.draft = meta.draft === "true";
+  meta.noindex = meta.noindex === "true";
   // .html pages are hand-built markup: used as-is, not run through Markdown
   return { meta, html: sponsor(file.endsWith(".html") ? m[2] : marked.parse(m[2])) };
 }
@@ -72,7 +99,8 @@ const NAV = [
 ];
 
 // `assets` names a root-level <name>.css / <name>.js pair that only this page loads.
-function layout({ title, description, urlPath, body, type = "website", assets, mainClass = "page" }) {
+// `jsonld` is a list of schema.org objects; `noindex` keeps thin pages out of search.
+function layout({ title, description, urlPath, body, type = "website", assets, mainClass = "page", jsonld = [], noindex = false }) {
   const url = SITE + urlPath;
   return `<!doctype html>
 <html lang="en">
@@ -82,7 +110,7 @@ function layout({ title, description, urlPath, body, type = "website", assets, m
     <meta name="theme-color" content="#1a1418" />
     <title>${esc(title)}</title>
     <meta name="description" content="${esc(description)}" />
-    <link rel="canonical" href="${url}" />
+    <link rel="canonical" href="${url}" />${noindex ? '\n    <meta name="robots" content="noindex, follow" />' : ""}
     <meta property="og:title" content="${esc(title)}" />
     <meta property="og:description" content="${esc(description)}" />
     <meta property="og:type" content="${type}" />
@@ -102,7 +130,9 @@ function layout({ title, description, urlPath, body, type = "website", assets, m
       assets ? `\n    <script src="/${assets}.js?v=${hash(`${assets}.js`)}" defer></script>` : ""
     }
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />${jsonld
+      .map((d) => `\n    <script type="application/ld+json">\n${ldJson(d)}\n    </script>`)
+      .join("")}
   </head>
   <body>
     <div class="grain" aria-hidden="true"></div>
@@ -154,7 +184,9 @@ const posts = fs
     if (!/^\d{4}-\d{2}-\d{2}$/.test(meta.date) || isNaN(date)) {
       throw new Error(`content/blog/${f}: date must be YYYY-MM-DD, got "${meta.date}"`);
     }
-    return { ...meta, date, html, slug: f.replace(/\.md$/, "") };
+    const slug = f.replace(/\.md$/, "");
+    const iso = meta.date;
+    return { ...meta, date, iso, modified: latest(iso, gitDate(`content/blog/${f}`)), html, slug };
   })
   .filter((p) => !p.draft)
   .sort((a, b) => b.date - a.date);
@@ -170,6 +202,23 @@ for (const p of posts) {
       description: p.description,
       urlPath: `/blog/${p.slug}`,
       type: "article",
+      jsonld: [
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: p.title,
+          description: p.description,
+          datePublished: p.iso,
+          dateModified: p.modified,
+          author: PERSON,
+          publisher: PERSON,
+          image: `${SITE}/images/og.jpg`,
+          mainEntityOfPage: `${SITE}/blog/${p.slug}`,
+          inLanguage: "en",
+          ...(p.tags.length && { keywords: p.tags.join(", ") }),
+        },
+        breadcrumbs([["Home", "/"], ["Blog", "/blog"], [p.title, `/blog/${p.slug}`]]),
+      ],
       body: `      <article class="post">
         <p class="section-tag"><a href="/blog">blog</a> &middot; <time datetime="${p.date.toISOString().slice(0, 10)}">${fmtDate(p.date)}</time></p>
         <h1 class="page__title">${esc(p.title)}</h1>
@@ -189,6 +238,7 @@ write(
     title: `Blog — ${AUTHOR}`,
     description: "Notes on building fast websites, small AI automations, and the tools behind them.",
     urlPath: "/blog",
+    jsonld: [breadcrumbs([["Home", "/"], ["Blog", "/blog"]])],
     body: `      <header>
         <p class="section-tag">blog</p>
         <h1 class="page__title">Notes from building in public.</h1>
@@ -212,10 +262,11 @@ ${NEWSLETTER}`,
 );
 
 // 3. Standalone pages -> dist/<slug>.html, served at /<slug>.
-const pages = fs.readdirSync("content/pages").filter((f) => /\.(md|html)$/.test(f));
-for (const f of pages) {
-  const slug = f.replace(/\.(md|html)$/, "");
-  const { meta, html } = parse(`content/pages/${f}`);
+const pages = fs
+  .readdirSync("content/pages")
+  .filter((f) => /\.(md|html)$/.test(f))
+  .map((f) => ({ f, slug: f.replace(/\.(md|html)$/, ""), ...parse(`content/pages/${f}`) }));
+for (const { f, slug, meta, html } of pages) {
   if (f.endsWith(".html")) {
     write(
       `${slug}.html`,
@@ -223,6 +274,7 @@ for (const f of pages) {
         title: `${meta.title} — ${AUTHOR}`,
         description: meta.description,
         urlPath: `/${slug}`,
+        noindex: meta.noindex,
         body: html,
         assets: slug,
         mainClass: slug,
@@ -236,6 +288,7 @@ for (const f of pages) {
       title: `${meta.title} — ${AUTHOR}`,
       description: meta.description,
       urlPath: `/${slug}`,
+      noindex: meta.noindex,
       body: `      <article class="post">
         <p class="section-tag">${esc(meta.tag || slug.replaceAll("-", " "))}</p>
         <h1 class="page__title">${esc(meta.heading || meta.title)}</h1>
@@ -255,6 +308,7 @@ write(
     title: `Page not found — ${AUTHOR}`,
     description: "This page doesn't exist.",
     urlPath: "/404",
+    noindex: true,
     body: `      <article class="post">
         <p class="section-tag">404</p>
         <h1 class="page__title">This page doesn&rsquo;t exist.</h1>
@@ -291,12 +345,13 @@ ${p.tags.map((t) => `      <category>${esc(t)}</category>`).join("\n")}
 `;
 write("rss.xml", rss);
 
+// [path, lastmod]. Noindexed pages stay out: a sitemap should list only pages meant to rank.
 const urls = [
-  ["/", "1.0"],
-  ["/zh", "0.8"],
-  ["/blog", "0.8"],
-  ...pages.map((f) => [`/${f.replace(/\.(md|html)$/, "")}`, "0.6"]),
-  ...posts.map((p) => [`/blog/${p.slug}`, "0.7", p.date.toISOString().slice(0, 10)]),
+  ["/", gitDate("index.html")],
+  ["/zh", gitDate("zh.html")],
+  ["/blog", latest(...posts.map((p) => p.modified))],
+  ...pages.filter((p) => !p.meta.noindex).map((p) => [`/${p.slug}`, gitDate(`content/pages/${p.f}`)]),
+  ...posts.map((p) => [`/blog/${p.slug}`, p.modified]),
 ];
 write(
   "sitemap.xml",
@@ -304,8 +359,7 @@ write(
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls
   .map(
-    ([u, pr, lastmod]) =>
-      `  <url>\n    <loc>${SITE}${u}</loc>\n${lastmod ? `    <lastmod>${lastmod}</lastmod>\n` : ""}    <priority>${pr}</priority>\n  </url>`,
+    ([u, lastmod]) => `  <url>\n    <loc>${SITE}${u}</loc>\n${lastmod ? `    <lastmod>${lastmod}</lastmod>\n` : ""}  </url>`,
   )
   .join("\n")}
 </urlset>
