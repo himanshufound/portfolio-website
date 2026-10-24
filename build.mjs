@@ -17,7 +17,7 @@ const PUBLIC = [
   "index.html", "zh.html", "styles.css", "script.js", "demos.js", "motion.js", "prose.css",
   "work-with-me.css", "work-with-me.js",
   "favicon.svg", "apple-touch-icon.png", "resume.pdf", "robots.txt", "llms.txt", "_redirects", "_headers",
-  "fonts", "images", "audio",
+  "fonts", "images",
 ];
 
 const esc = (s) =>

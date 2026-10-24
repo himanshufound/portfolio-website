@@ -4,9 +4,6 @@
   Cache-Control: public, max-age=31536000, immutable
 /images/*
   Cache-Control: public, max-age=31536000, immutable
-/audio/*
-  Cache-Control: public, max-age=31536000, immutable
-  X-Robots-Tag: noindex
 /go/*
   X-Robots-Tag: noindex
 # Preview hosts duplicate the site; keep them out of search (canonicals already point home).

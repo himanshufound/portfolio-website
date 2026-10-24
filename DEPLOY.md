@@ -93,5 +93,5 @@ Do these in order. Nothing breaks if you stop half-way.
 
 ## Known gaps
 
-- Cloudflare's `_headers` matches paths only, so the year-long cache on `styles.css?v=…`, `script.js?v=…`, `demos.js?v=…` and `fonts/fonts.css?v=…` from `vercel.json` can't be ported. Those files fall back to Cloudflare's default cache, which revalidates each time and stays correct. Fonts, images and audio keep their year-long immutable cache.
+- Cloudflare's `_headers` matches paths only, so the year-long cache on `styles.css?v=…`, `script.js?v=…`, `demos.js?v=…` and `fonts/fonts.css?v=…` from `vercel.json` can't be ported. Those files fall back to Cloudflare's default cache, which revalidates each time and stays correct. Fonts and images keep their year-long immutable cache.
 - `vercel.json` stays in place as a bridge until step 8. Delete it after the cutover.
