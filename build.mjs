@@ -27,10 +27,19 @@ const fmtDate = (d) =>
   d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
 // Last commit date (YYYY-MM-DD) of a source file, for sitemap <lastmod> and dateModified.
 // Undefined for uncommitted files, so the sitemap never claims a date it can't back up.
-// ponytail: a shallow clone reports its tip date for every file; build from a full clone.
+// CI (Cloudflare Pages) clones shallow, which would stamp every file with the tip's date:
+// fetch full history first, and if that fails, report no dates at all rather than wrong ones.
+const git = (...args) => execFileSync("git", args, { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).trim();
+let historyOk = true;
+try {
+  if (git("rev-parse", "--is-shallow-repository") === "true") git("fetch", "--unshallow", "--quiet");
+} catch {
+  historyOk = false;
+}
 const gitDate = (file) => {
+  if (!historyOk) return undefined;
   try {
-    return execFileSync("git", ["log", "-1", "--format=%cs", "--", file], { encoding: "utf8" }).trim() || undefined;
+    return git("log", "-1", "--format=%cs", "--", file) || undefined;
   } catch {
     return undefined;
   }
